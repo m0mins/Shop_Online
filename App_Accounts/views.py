@@ -59,4 +59,26 @@ def verify(request,auth_token):
 def success(r):
     return render(r,'App_Accounts/success.html')
 
+def login_user(request):
+    if request.method == 'POST':
+        email=request.POST.get("email")
+        password=request.POST.get("password")
+        user = authenticate(email=email, password=password)
+        if user is not None:
+            login(request, user)              
+            return HttpResponseRedirect(reverse('App_Home:home'))
+        else:
+            # Return an error message or redirect to the login page with an error message
+            return HttpResponse('Invalid login credentials')
+    return render(request, 'App_Accounts/login.html')
 
+@login_required
+def logout_user(request):
+    logout(request)
+    messages.warning(request, "You are logged out!!")
+    return redirect("App_Home:home")
+
+def customerDetails(request, pk):
+    customerId = User.objects.get(id=pk)
+    context = {'customerId':customerId}
+    return render(request, 'App_Accounts/profile.html', context)
