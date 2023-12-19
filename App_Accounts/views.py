@@ -14,6 +14,7 @@ import uuid
 from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 # Forms and Models
+from App_Accounts.forms import ProfileForm
 from App_Accounts.models import Profile
 #from App_Login.forms import ProfileForm, SignUpForm
 
@@ -132,4 +133,17 @@ def reset_verify(request,auth_token):
         
         messages.success(request, "Wrong Email Address!")
         return render(request,'App_Accounts/forgot.html')
+
+@login_required
+def profile_update(request):
+    profile = Profile.objects.get(user=request.user)
+    form = ProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = ProfileForm(request.POST, instance=profile)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile Updated Successfully!!")
+            form = ProfileForm(instance=profile)
+            return redirect("App_Home:home")
+    return render(request, 'App_Accounts/profile_update.html', context={'form':form})
     

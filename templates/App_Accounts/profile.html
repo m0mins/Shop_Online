@@ -11,7 +11,8 @@
         </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h4 class="card-title">{{customerId.username}}</h4>
+              <h4 class="card-title">{{customerId.profile.full_name}}</h4>
+              <p class="card-text">Username : {{customerId.username}}</p>
               <p class="card-text">Email : {{customerId.email}}</p>
               <p class="card-text">Address : {{customerId.profile.address_1}}</p>
               <p class="card-text">City : {{customerId.profile.city}}</p>
@@ -24,7 +25,7 @@
         </div>
         <div class="card-footer text-muted">
             <div class="d-grid gap-2">
-              <a href="" class="btn btn-success">Update</a>
+              <a href="{% url 'App_Accounts:profile_update' %}" class="btn btn-success">Update</a>
             </div>
 
           </div>
