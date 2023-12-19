@@ -38,7 +38,7 @@ class MyUserManager(BaseUserManager):
         return self._create_user(email, password, **extra_fields)
 
 class User(AbstractBaseUser, PermissionsMixin):
-    name= models.CharField(max_length=100, blank=True)
+    username= models.CharField(max_length=100, blank=True)
     email = models.EmailField(unique=True, null=False)
     auth_token=models.CharField(max_length=100, blank=False)
     is_varified = models.BooleanField(default=False)
@@ -68,7 +68,6 @@ class User(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    username = models.CharField(max_length=264, blank=True)
     full_name = models.CharField(max_length=264, blank=True)
     address_1 = models.TextField(max_length=300, blank=True)
     city = models.CharField(max_length=40, blank=True)
@@ -78,7 +77,7 @@ class Profile(models.Model):
     date_joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.username + "'s Profile"
+        return self.user.username + "'s Profile"
 
     def is_fully_filled(self):
         fields_names = [f.name for f in self._meta.get_fields()]

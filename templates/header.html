@@ -49,7 +49,7 @@
             <div class="row align-items-center">
                 <div class="col-lg-2">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="index.html"><img src="{% static 'assets/images/logo.svg'%}"
+                        <a class="navbar-brand" href="{% url 'App_Home:home' %}"><img src="{% static 'assets/images/logo.svg'%}"
                                 alt="logo"></a>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                     <div class="middle-right">
                         <ul>
                             {%if user.is_authenticated%}
-                            <li><a href="{% url 'App_Accounts:customer_details' pk=user.pk %}"><span>{{user.name}}</span></a></li>
+                            <li><a href="{% url 'App_Accounts:customer_details' pk=user.pk %}"><span>{{user.username}}</span></a></li>
                             <li><a href="{% url 'App_Accounts:logout' %}"><i class="fi flaticon-user-profile"></i><span>Logout</span></a></li>
                             {%else%}
                             <li><a href="{% url 'App_Accounts:login' %}"><i class="fi flaticon-user-profile"></i><span>Login</span></a></li>
@@ -203,7 +203,7 @@
                     </div>
                     <div class="col-lg-1 col-md-6 col-sm-5 col-6 d-block d-lg-none">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="index.html"><img src="{% static 'assets/images/logo.svg'%}"
+                            <a class="navbar-brand" href="{% url 'App_Home:home' %}"><img src="{% static 'assets/images/logo.svg'%}"
                                     alt="logo"></a>
                         </div>
                     </div>

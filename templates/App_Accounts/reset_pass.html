@@ -10,7 +10,7 @@
                     {%csrf_token%}
                     <div class="wpo-accountInfo">
                         <div class="wpo-accountInfoHeader">
-                            <a href="index.html"><img src="{% static 'assets/images/logo-2.svg'%}" alt=""></a>
+                            <a href="{% url 'App_Home:home' %}"><img src="{% static 'assets/images/logo-2.svg'%}" alt=""></a>
                            
                             <a class="wpo-accountBtn" href="{% url 'App_Accounts:register' %}">
                                 <span class="">Create Account</span>
@@ -27,19 +27,15 @@
                     </div>
                     <div class="wpo-accountForm form-style">
                         <div class="fromTitle">
-                            <h2>Login</h2>
-                            <p>Sign into your pages account</p>
+                            <h2>Update Password</h2>
+                            <p>Set passowrd to recover your forgot password</p>
                         </div>
                         <div class="row">
-                            <div class="col-lg-12 col-md-12 col-12">
-                                <label>Email</label>
-                                <input type="text" id="email" name="email" placeholder="demo@gmail.com">
-                            </div>
                             <div class="col-lg-12 col-md-12 col-12">
                                 <div class="form-group">
                                     <label>Password</label>
                                     <input class="pwd6" type="password" placeholder="" value="123456"
-                                        name="password">
+                                        name="pass">
                                     <span class="input-group-btn">
                                         <button class="btn btn-default reveal6" type="button"><i
                                                 class="ti-eye"></i></button>
@@ -47,15 +43,19 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 col-md-12 col-12">
-                                <div class="check-box-wrap">
-                                    
-                                    <div class="forget-btn">
-                                        <a href="{% url 'App_Accounts:forgot' %}">Forgot Password?</a>
-                                    </div>
+                                <div class="form-group">
+                                    <label>Confirm Password</label>
+                                    <input class="pwd6" type="password" placeholder="" value="123456"
+                                        name="pass1">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default reveal6" type="button"><i
+                                                class="ti-eye"></i></button>
+                                    </span>
                                 </div>
                             </div>
+                
                             <div class="col-lg-12 col-md-12 col-12">
-                                <button type="submit" class="wpo-accountBtn">Login</button>
+                                <button type="submit" class="wpo-accountBtn">Reset Password</button>
                             </div>
                         </div>
                         <h4 class="or"><span>OR</span></h4>

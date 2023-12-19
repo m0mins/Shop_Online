@@ -12,6 +12,7 @@ from django.conf import settings
 from App_Accounts.models import User,Profile
 import uuid
 from django.core.mail import send_mail
+from django.contrib.auth import update_session_auth_hash
 # Forms and Models
 from App_Accounts.models import Profile
 #from App_Login.forms import ProfileForm, SignUpForm
@@ -21,7 +22,7 @@ from django.contrib import messages
 
 def register(request):
     if request.method == 'POST':
-        name=request.POST.get('name')
+        username=request.POST.get('username')
         email=request.POST.get('email')
         password=request.POST.get('pass')
         password1=request.POST.get('pass1')
@@ -34,7 +35,7 @@ def register(request):
                     messages.error(request,"Email already taken")
                     return HttpResponseRedirect(reverse('App_Accounts:register'))
                 auth_token=str(uuid.uuid4())
-                user=User.objects.create(name=name,email=email,password=password,auth_token=auth_token)
+                user=User.objects.create(username=username,email=email,password=password,auth_token=auth_token)
                 user.set_password(password)           
                 user.save()
                 send_email(email,auth_token)
@@ -60,17 +61,21 @@ def success(r):
     return render(r,'App_Accounts/success.html')
 
 def login_user(request):
-    if request.method == 'POST':
-        email=request.POST.get("email")
-        password=request.POST.get("password")
-        user = authenticate(email=email, password=password)
-        if user is not None:
-            login(request, user)              
-            return HttpResponseRedirect(reverse('App_Home:home'))
-        else:
-            # Return an error message or redirect to the login page with an error message
-            return HttpResponse('Invalid login credentials')
-    return render(request, 'App_Accounts/login.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('App_Home:home'))
+    else:
+
+        if request.method == 'POST':
+            email=request.POST.get("email")
+            password=request.POST.get("password")
+            user = authenticate(email=email, password=password)
+            print(user)
+            if user is not None:
+                login(request, user)              
+                return HttpResponseRedirect(reverse('App_Home:home'))
+            else:
+                return HttpResponse('Invalid login credentials')
+        return render(request, 'App_Accounts/login.html')
 
 @login_required
 def logout_user(request):
@@ -78,7 +83,53 @@ def logout_user(request):
     messages.warning(request, "You are logged out!!")
     return redirect("App_Home:home")
 
+@login_required
 def customerDetails(request, pk):
     customerId = User.objects.get(id=pk)
     context = {'customerId':customerId}
     return render(request, 'App_Accounts/profile.html', context)
+
+
+def forgot_pass(request):
+    if request.method == 'POST':
+        email=request.POST.get("email")
+        user=User.objects.get(email=email)
+        db_auth=user.auth_token
+        reset_send_email(email,db_auth)
+        return HttpResponseRedirect(reverse('App_Accounts:success'))
+    return render(request,'App_Accounts/forgot.html')
+
+def reset_send_email(email,auth_token):
+    subject='Reset Password link'
+    message=f'Hi clink the link to Reset Your Password http://127.0.0.1:8000/accounts/reset_verify/{auth_token}'
+    email_from=settings.EMAIL_HOST_USER
+    recipient=[email]
+    send_mail(subject,message,email_from,recipient)
+
+def reset_verify(request,auth_token):
+    user=User.objects.get(auth_token=auth_token)
+    print(user)
+    if user:
+        
+        if request.method=='POST':
+            print("**********************")
+            password=request.POST.get('pass')
+            print()
+            password1=request.POST.get('pass1')
+            if password==password1:
+                
+                user.set_password(password)
+                user.save()
+                update_session_auth_hash(request,user)
+                messages.success(request, "Password Changed Successfully!")
+                return redirect("App_Accounts:login")
+            else:
+                return redirect(request.META['HTTP_REFERER'])
+            
+       
+        return render(request,'App_Accounts/reset_pass.html')
+    else:
+        
+        messages.success(request, "Wrong Email Address!")
+        return render(request,'App_Accounts/forgot.html')
+    

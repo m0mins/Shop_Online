@@ -11,5 +11,7 @@ urlpatterns = [
     path('success/',views.success, name='success'),
     path('verify/<auth_token>/',views.verify, name='verify'),
     path('customer_details/<int:pk>/',views.customerDetails,name='customer_details'),
+    path('forgot/',views.forgot_pass, name='forgot'),
+    path('reset_verify/<auth_token>/',views.reset_verify, name='reset_verify'),
     
 ]

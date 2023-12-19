@@ -11,17 +11,21 @@
         </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h4 class="card-title">{{customerId.name}}</h4>
-              <p class="card-text">Email Address : {{customerId.email}}</p>
+              <h4 class="card-title">{{customerId.username}}</h4>
+              <p class="card-text">Email : {{customerId.email}}</p>
+              <p class="card-text">Address : {{customerId.profile.address_1}}</p>
+              <p class="card-text">City : {{customerId.profile.city}}</p>
+              <p class="card-text">Country : {{customerId.profile.country}}</p>
+              <p class="card-text">Contact : {{customerId.profile.phone}}</p>
               
             </div>
           </div>
           
         </div>
         <div class="card-footer text-muted">
-            <a href="" class="btn btn-success">Update</a>
-
-            <a href="" class="btn btn-danger">Delete</a>
+            <div class="d-grid gap-2">
+              <a href="" class="btn btn-success">Update</a>
+            </div>
 
           </div>
       </div>
