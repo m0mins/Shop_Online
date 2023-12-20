@@ -70,7 +70,7 @@ def login_user(request):
             email=request.POST.get("email")
             password=request.POST.get("password")
             user = authenticate(email=email, password=password)
-            print(user)
+    
             if user is not None:
                 login(request, user)              
                 return HttpResponseRedirect(reverse('App_Home:home'))
@@ -109,13 +109,12 @@ def reset_send_email(email,auth_token):
 
 def reset_verify(request,auth_token):
     user=User.objects.get(auth_token=auth_token)
-    print(user)
     if user:
         
         if request.method=='POST':
-            print("**********************")
+            
             password=request.POST.get('pass')
-            print()
+        
             password1=request.POST.get('pass1')
             if password==password1:
                 
@@ -136,14 +135,13 @@ def reset_verify(request,auth_token):
 
 @login_required
 def profile_update(request):
-    profile = Profile.objects.get(user=request.user)
-    form = ProfileForm(instance=profile)
+    current_user = Profile.objects.get(user=request.user)
+    form = ProfileForm(instance=current_user)
     if request.method == 'POST':
-        form = ProfileForm(request.POST, instance=profile)
+        form = ProfileForm(request.POST,request.FILES, instance=current_user)
         if form.is_valid():
-            form.save()
+            form.save(commit=True)
             messages.success(request, "Profile Updated Successfully!!")
-            form = ProfileForm(instance=profile)
             return redirect("App_Home:home")
     return render(request, 'App_Accounts/profile_update.html', context={'form':form})
     

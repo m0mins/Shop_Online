@@ -7,7 +7,11 @@
     <div class="card mb-3" style="max-width: 540px; margin-top: 40px;">
         <div class="row g-0">
           <div class="col-md-4">
-            <img src="/media/default.png" style="width:100%; height:200px;">
+            {%if user.profile.image%}
+            <img src="/media/{{user.profile.image}}" style="width:100%; height:200px;">
+            {%else%}
+          <img src="/media/default.png" style="width:100%; height:200px;"> 
+        {%endif%}
         </div>
           <div class="col-md-8">
             <div class="card-body">

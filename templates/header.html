@@ -80,7 +80,24 @@
                     <div class="middle-right">
                         <ul>
                             {%if user.is_authenticated%}
-                            <li><a href="{% url 'App_Accounts:customer_details' pk=user.pk %}"><span>{{user.username}}</span></a></li>
+                        
+                            <li class="nav-item dropdown">
+                                {%if user.profile.image%}
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> <img src="/media/{{user.profile.image}}" width="40px" height="40px"class="rounded-circle"></a>
+                                {%else%}
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> <img src="/media/default.png" width="40px" height="40px"class="rounded-circle"></a>
+                                {%endif%}
+                                <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
+                                  <a class="dropdown-item" href="">Profile</a>
+                      
+                                  <a class="dropdown-item" href="">Orders</a>
+                                            
+                                  <div class="dropdown-divider"></div>
+                                  <a class="dropdown-item" href="">Logout</a>
+                                </div>
+                              </li>
+                   
+
                             <li><a href="{% url 'App_Accounts:logout' %}"><i class="fi flaticon-user-profile"></i><span>Logout</span></a></li>
                             {%else%}
                             <li><a href="{% url 'App_Accounts:login' %}"><i class="fi flaticon-user-profile"></i><span>Login</span></a></li>
@@ -275,7 +292,7 @@
                             <button class="menu-close"><i class="ti-close"></i></button>
                             <ul class="nav navbar-nav mb-2 mb-lg-0">
                                 <li class="menu-item-has-children">
-                                    <a href="#">Home</a>
+                                    <a href="{% url 'App_Home:home' %}">Home</a>
                                 </li>
                                 <li><a href="about.html">About</a></li>
                                 <li class="menu-item-has-children">
