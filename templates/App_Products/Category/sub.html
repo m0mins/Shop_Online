@@ -1,0 +1,41 @@
+{% extends 'base.html'%}
+{% load static %}
+{% block title_block %} ShopOnline {% endblock %}
+{% block body_block %}
+<div class="container my-5">
+    <h2 class="my-5">Products in {{ category.title }}</h2>
+    <div class="row">
+        {% if products %}
+        {% for product in products %}
+
+      <div class="col-md-6 col-sm-12 col-lg-3">
+        <figure class="card card-product">
+          <div class="img-wrap">
+            <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
+          </div>
+          <figcaption class="info-wrap">
+            <h6 class="title"><a href="">{{ product.name }}</a></h6>
+         
+            <div class="action-wrap">
+              <div class="price-wrap h5">
+              <span class="price-new">&#2547; {{product.price|floatformat:2}}</span>
+              <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
+              </div>
+            </div>
+            <div class="pro-single-btn">
+              <div class="quantity cart-plus-minus">
+                  <input class="text-value" type="text" value="1">
+              </div>
+              <a href="#" class="theme-btn-s2">Add to Cart</a>
+              <a href="#" class="wl-btn"><i class="fi flaticon-heart"></i></a>
+          </div>
+          </figcaption>
+          
+        </figure>
+      </div>
+   {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+
+  {% endblock %}

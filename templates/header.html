@@ -231,14 +231,14 @@
                             <div class="mini-shop-item">
                                 <ul id="metis-menu">
                                     <li>
-                                        <a href="product.html">Feature Product</a>
+                                        <a href="{% url 'App_Products:cate' %}" >Feature Product</a>
                                     </li>
                                     <li class="header-catagory-item">
-                                        <a class="menu-down-arrow" href="#">Perfunsee & Cologne</a>
+                                        <a class="menu-down-arrow" href="{% url 'App_Products:sub_category_products' sub_category_id=1 %}">Perfunsee & Cologne</a>
                                         <ul class="header-catagory-single">
-                                            <li><a href="#">Men's Clothing</a></li>
-                                            <li><a href="#">Computer & Office</a></li>
-                                            <li><a href="#">Jewelry & Watches</a></li>
+                                            <li><a href="{% url 'App_Products:sub' category='Clothes' %}">Men's Clothing</a></li>
+                                            <li><a href="{% url 'App_Products:sub_category_products' sub_category_id=1 %}">testing </a></li>
+                                            <li><a href="{% url 'App_Products:sub_category_products' sub_category_id=2 %}">Jewelry & Watches</a></li>
                                             <li><a href="#">Phones & Accessories</a></li>
                                         </ul>
                                     </li>

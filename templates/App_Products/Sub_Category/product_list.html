@@ -1,0 +1,19 @@
+<!-- Create a template named product_list.html in your app's templates directory -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+</head>
+<body>
+    <h2>Products</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <img src="{{ product.mainimage.url }}" alt="{{ product.name }}">
+                <h3>{{ product.name }}</h3>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
