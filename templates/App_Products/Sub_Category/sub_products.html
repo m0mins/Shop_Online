@@ -3,10 +3,41 @@
 {% block title_block %} ShopOnline {% endblock %}
 {% block body_block %}
 <div class="container my-5">
-    <h2 class="my-5">Products in {{ category.title }}</h2>
+  {% if subcategory %}
+  <div class="row">
+    {% if selected_subcategory %}
+    <h3> Products of {{ selected_subcategory.title }}</h3>
+    {% for product in subcategory_products %}
+
+    <div class="col-md-6 col-sm-12 col-lg-3">
+      <figure class="card card-product">
+        <div class="img-wrap">
+          <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
+        </div>
+        <figcaption class="info-wrap">
+          <h6 class="title"><a href="">{{ product.name }}</a></h6>
+       
+          <div class="action-wrap">
+            <div class="price-wrap h5">
+            <span class="price-new">&#2547; {{product.price|floatformat:2}}</span>
+            <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
+            </div>
+          </div>
+          <div class="pro-single-btn">
+            <a href="#" class="theme-btn-s2">Add to Cart</a>
+        </div>
+        </figcaption>
+        
+      </figure>
+    </div>
+ {% endfor %}
+    {% endif %}
+  </div>
+</div>
+  {% else %}
+    <h2 class="my-5">Products of {{ category.title }}</h2>  
     <div class="row">
-        {% if products %}
-        {% for product in products %}
+      {% for product in products %}
 
       <div class="col-md-6 col-sm-12 col-lg-3">
         <figure class="card card-product">
@@ -34,8 +65,7 @@
         </figure>
       </div>
    {% endfor %}
-      {% endif %}
+   {% endif %}
     </div>
-  </div>
 
   {% endblock %}

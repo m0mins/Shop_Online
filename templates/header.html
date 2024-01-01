@@ -229,63 +229,20 @@
                         <div class="header-shop-item">
                             <button class="header-shop-toggle-btn"><span>Shop By Category</span> </button>
                             <div class="mini-shop-item">
-                                <ul id="metis-menu">
-                                    <li>
-                                        <a href="{% url 'App_Products:cate' %}" >Feature Product</a>
-                                    </li>
+                                {% for category, subcategories in categories_with_subcategories.items %}
+                                <ul id="metis-menu">                             
                                     <li class="header-catagory-item">
-                                        <a class="menu-down-arrow" href="{% url 'App_Products:sub_category_products' sub_category_id=1 %}">Perfunsee & Cologne</a>
+                                        <a class="menu-down-arrow" href="{% url 'App_Products:category_products' category_name=category.title %}">{{ category.title }}</a>
                                         <ul class="header-catagory-single">
-                                            <li><a href="{% url 'App_Products:sub' category='Clothes' %}">Men's Clothing</a></li>
-                                            <li><a href="{% url 'App_Products:sub_category_products' sub_category_id=1 %}">testing </a></li>
-                                            <li><a href="{% url 'App_Products:sub_category_products' sub_category_id=2 %}">Jewelry & Watches</a></li>
-                                            <li><a href="#">Phones & Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="product.html">Best Sellers</a>
-                                    </li>
-                                    <li class="header-catagory-item">
-                                        <a class="menu-down-arrow" href="#">Men Fashion</a>
-                                        <ul class="header-catagory-single">
-                                            <li><a href="#">Men's Clothing</a></li>
-                                            <li><a href="#">Computer & Office</a></li>
-                                            <li><a href="#">Jewelry & Watches</a></li>
-                                            <li><a href="#">Phones & Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="product.html">Bags & Shoes</a>
-                                    </li>
-                                    <li class="header-catagory-item">
-                                        <a class="menu-down-arrow" href="#">Women Fashion</a>
-                                        <ul class="header-catagory-single">
-                                            <li><a href="#">Men's Clothing</a></li>
-                                            <li><a href="#">Computer & Office</a></li>
-                                            <li><a href="#">Jewelry & Watches</a></li>
-                                            <li><a href="#">Phones & Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                    <li class="header-catagory-item">
-                                        <a class="menu-down-arrow" href="#">Toys & kids Baby</a>
-                                        <ul class="header-catagory-single">
-                                            <li><a href="#">Men's Clothing</a></li>
-                                            <li><a href="#">Computer & Office</a></li>
-                                            <li><a href="#">Jewelry & Watches</a></li>
-                                            <li><a href="#">Phones & Accessories</a></li>
-                                        </ul>
-                                    </li>
-                                    <li>
-                                        <a href="product.html">Men's Clothing</a>
-                                    </li>
-                                    <li>
-                                        <a href="product.html">On Sale</a>
-                                    </li>
-                                    <li>
-                                        <a href="product.html">All Accessories</a>
-                                    </li>
+                                            {% for subcategory in subcategories %} 
+                                            <li><a href="{% url 'App_Products:subcategory_products' category_name=category.title subcategory_name=subcategory.title %}">{{ subcategory.title }}</a></li>
+                                            {% endfor %}                             
+                                        </ul>                                     
+                                    </li>                                                            
                                 </ul>
+                                {%endfor%}
                             </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-8 col-md-1 col-1">
