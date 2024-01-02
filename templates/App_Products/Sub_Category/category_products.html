@@ -15,7 +15,7 @@
           <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
         </div>
         <figcaption class="info-wrap">
-          <h6 class="title"><a href="">{{ product.name }}</a></h6>
+          <h5 class="title"><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h5>
        
           <div class="action-wrap">
             <div class="price-wrap h5">
@@ -23,9 +23,6 @@
             <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
             </div>
           </div>
-          <div class="pro-single-btn">
-            <a href="#" class="theme-btn-s2">Add to Cart</a>
-        </div>
         </figcaption>
         
       </figure>
@@ -45,7 +42,7 @@
             <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
           </div>
           <figcaption class="info-wrap">
-            <h6 class="title"><a href="">{{ product.name }}</a></h6>
+            <h5 class="title"><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h5>
          
             <div class="action-wrap">
               <div class="price-wrap h5">
@@ -53,13 +50,6 @@
               <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
               </div>
             </div>
-            <div class="pro-single-btn">
-              <div class="quantity cart-plus-minus">
-                  <input class="text-value" type="text" value="1">
-              </div>
-              <a href="#" class="theme-btn-s2">Add to Cart</a>
-              <a href="#" class="wl-btn"><i class="fi flaticon-heart"></i></a>
-          </div>
           </figcaption>
           
         </figure>

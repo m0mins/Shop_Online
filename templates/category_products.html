@@ -1,0 +1,30 @@
+<!-- category_products.html -->
+
+<h2>{{ category.title }} Products</h2>
+
+<ul>
+  {% for product in products %}
+    <li>{{ product.name }}</li>
+  {% endfor %}
+</ul>
+
+{% if subcategories %}
+  <h3>Subcategories</h3>
+  <ul>
+    {% for subcategory in subcategories %}
+      <li>
+          {{ subcategory.title }}
+        </a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endif %}
+
+{% if selected_subcategory %}
+  <h3>{{ selected_subcategory.name }} Products</h3>
+  <ul>
+    {% for product in subcategory_products %}
+      <li>{{ product.name }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
