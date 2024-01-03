@@ -60,7 +60,7 @@
                             <i class="fi flaticon-star"></i>
                             <span>120</span>
                         </div>
-                        <p>{{preview}}</p>
+                        <p>{{preview|linebreaks}}</p>
                         
                         <div class="product-filter-item color">
                             <div class="color-name">
@@ -94,7 +94,7 @@
                             <div class="quantity cart-plus-minus">
                                 <input class="text-value" type="text" value="1">
                             </div>
-                            <a href="#" class="theme-btn-s2">Add to cart</a>
+                            <a href="{% url 'App_Order:add' pk=product_id %}" class="theme-btn-s2">Add to cart</a>
                             <a href="#" class="wl-btn"><i class="fi flaticon-heart"></i></a>
                         </div>
                         <ul class="important-text">
@@ -131,7 +131,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="Descriptions-item">
-                                    <p> {{description}}</p>
+                                    <p> {{description|linebreaks}}</p>
                                     <div class="Description-table">
                                         <ul>
                                             <li>While thus cackled sheepishly rigid after due one assenting</li>

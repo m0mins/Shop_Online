@@ -71,6 +71,7 @@ def single_product(request, pk):
     color_variants = product.color_variants.all()
 
     context = {
+        'product_id':product.id,
         'name': product.name,
         'price': product.price,
         'old_price': product.old_price,
