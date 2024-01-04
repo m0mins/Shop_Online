@@ -1,0 +1,48 @@
+{% load static %}
+{% load cart_tags %}
+<header id="header">
+    <!-- end topbar -->
+    <!--  start header-middle -->
+    <div class="header-middle">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-2">
+                    <div class="navbar-header">
+                        <a class="navbar-brand" href="{% url 'App_Home:home' %}"><img src="{% static 'assets/images/logo.svg'%}"
+                                alt="logo"></a>
+                    </div>
+                </div>           
+                <div class="col-lg-4 col-12">
+                    <div class="middle-right">
+                        <ul>
+                            {%if user.is_authenticated%}
+                                                                   
+                            <li><a href="{% url 'App_Accounts:logout' %}"><i class="fi flaticon-user-profile"></i><span>Logout</span></a></li>
+
+                            {%endif%}                              
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--  end header-middle -->
+    <div class="wpo-site-header">
+        <nav class="navigation navbar navbar-expand-lg navbar-light">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-3 col-md-3 col-sm-3 col-3 d-lg-none dl-block">
+                        <div class="mobail-menu">
+                            <button type="button" class="navbar-toggler open-btn">
+                                <span class="sr-only">Toggle navigation</span>
+                                <span class="icon-bar first-angle"></span>
+                                <span class="icon-bar middle-angle"></span>
+                                <span class="icon-bar last-angle"></span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of container -->
+        </nav>
+    </div>
+</header>

@@ -88,7 +88,7 @@ def logout_user(request):
 def customerDetails(request, pk):
     customerId = User.objects.get(id=pk)
     context = {'customerId':customerId}
-    return render(request, 'App_Accounts/profile.html', context)
+    return render(request, 'App_Accounts/profile2.html', context)
 
 
 def forgot_pass(request):
@@ -144,4 +144,7 @@ def profile_update(request):
             messages.success(request, "Profile Updated Successfully!!")
             return redirect("App_Home:home")
     return render(request, 'App_Accounts/profile_update.html', context={'form':form})
+
+def profile2(request):
+    return render(request,'App_Accounts/profile2.html')
     

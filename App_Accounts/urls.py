@@ -14,5 +14,6 @@ urlpatterns = [
     path('forgot/',views.forgot_pass, name='forgot'),
     path('reset_verify/<auth_token>/',views.reset_verify, name='reset_verify'),
     path('profile_update/',views.profile_update,name='profile_update'),
+    path('test2/',views.profile2,name='test2'),
     
 ]

@@ -24,6 +24,8 @@
     <link href="{% static 'assets/css/odometer-theme-default.css'%}" rel="stylesheet">
     <link href="{% static 'assets/sass/style.css'%}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'assets/css/main.css' %}">
+    <link href="{% static 'assets/css/profile.css'%}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -44,7 +46,7 @@
         </div>
         <!-- end preloader -->
 
-
+{% include 'header2.html' %}
 <div class="container">
     <div class="messages container mt-2">
       {% if messages %}
