@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponseRedirect, redirect,get_object_o
 from django.views.generic import ListView, DetailView
 
 from App_Products.models import Product,Product_Size,Category,Sub_Category
+from App_Order.models import Cart
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -82,7 +83,8 @@ def single_product(request, pk):
         'colors': [color_variant.color.name for color_variant in color_variants],
         'sku': product.sku,
         'category': product.category.title,
-        'mainimage': product.mainimage
+        'mainimage': product.mainimage,
+   
     }
 
     return render(request, 'App_Products/single_product.html', context)

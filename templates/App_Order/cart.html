@@ -74,15 +74,18 @@
                                                 </ul>
                                             </div>
                                         </td>
-                                        <td class="ptice">${{cart.item.price}}</td>
+                                        <td class="ptice">&#2547;{{cart.item.price}}</td>
                                         <td class="td-quantity">
                                             <div class="quantity cart-plus-minus">
                                                 <input class="text-value" type="text" value={{cart.quantity}}>
-                                                <div class="dec qtybutton">-</div>
-                                                <div class="inc qtybutton">+</div>
+                                                   
+                                                <a class="dec qtybutton"  href="{% url 'App_Order:decrease' pk=cart.item.pk %}">-</a>
+                                       
+                                                <a class="inc qtybutton" href="{% url 'App_Order:increase' pk=cart.item.pk %}">+</a> 
+                                                               
                                             </div>
                                         </td>
-                                        <td class="ptice">${{cart.get_total}}</td>
+                                        <td class="ptice">&#2547;{{cart.get_total}}</td>
                                         <td class="action">
                                             <ul>
                                                 <li class="w-btn"><a data-bs-toggle="tooltip"
@@ -112,7 +115,7 @@
                         <h3>Cart Totals</h3>
                         <div class="sub-total">
                             <h4>Subtotal</h4>
-                            <span>${{order.get_totals}}</span>
+                            <span>&#2547;{{order.get_totals}}</span>
                         </div>
                         <div class="sub-total my-3">
                             <h4>Discount</h4>
@@ -120,7 +123,7 @@
                         </div>
                         <div class="total mb-3">
                             <h4>Total</h4>
-                            <span>${{order.get_totals}}</span>
+                            <span>&#2547;{{order.get_totals}}</span>
                         </div>
                         <a class="theme-btn-s2" href="checkout.html">Proceed To CheckOut</a>
                     </div>
@@ -147,8 +150,8 @@
                                 <span>130</span>
                             </div>
                             <div class="price">
-                                <span class="present-price">$120.00</span>
-                                <del class="old-price">$200.00</del>
+                                <span class="present-price">&#2547; 120.00</span>
+                                <del class="old-price">&#2547; 200.00</del>
                             </div>
                             <div class="shop-btn">
                                 <a class="theme-btn-s2" href="product.html">Shop Now</a>
@@ -173,8 +176,8 @@
                                 <span>120</span>
                             </div>
                             <div class="price">
-                                <span class="present-price">$160.00</span>
-                                <del class="old-price">$190.00</del>
+                                <span class="present-price">&#2547; 160.00</span>
+                                <del class="old-price">&#2547; 190.00</del>
                             </div>
                             <div class="shop-btn">
                                 <a class="theme-btn-s2" href="product.html">Shop Now</a>
@@ -199,8 +202,8 @@
                                 <span>150</span>
                             </div>
                             <div class="price">
-                                <span class="present-price">$150.00</span>
-                                <del class="old-price">$200.00</del>
+                                <span class="present-price">&#2547; 150.00</span>
+                                <del class="old-price">&#2547; 200.00</del>
                             </div>
                             <div class="shop-btn">
                                 <a class="theme-btn-s2" href="product.html">Shop Now</a>
@@ -225,8 +228,8 @@
                                 <span>120</span>
                             </div>
                             <div class="price">
-                                <span class="present-price">$120.00</span>
-                                <del class="old-price">$150.00</del>
+                                <span class="present-price">&#2547; 120.00</span>
+                                <del class="old-price">&#2547; 150.00</del>
                             </div>
                             <div class="shop-btn">
                                 <a class="theme-btn-s2" href="product.html">Shop Now</a>

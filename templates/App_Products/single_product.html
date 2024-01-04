@@ -49,8 +49,8 @@
                     <div class="product-single-content">
                         <h2>{{ name }}</h2>
                         <div class="price">
-                            <span class="present-price">{{price}}</span>
-                            <del class="old-price">{{old_price}}</del>
+                            <span class="present-price">&#2547;{{price}}</span>
+                            <del class="old-price">&#2547;{{old_price}}</del>
                         </div>
                         <div class="rating-product">
                             <i class="fi flaticon-star"></i>
@@ -93,6 +93,9 @@
                         <div class="pro-single-btn">
                             <div class="quantity cart-plus-minus">
                                 <input class="text-value" type="text" value="1">
+                                <a class="dec qtybutton"  href="#">-</a>
+                                       
+                                <a class="inc qtybutton" href="#">+</a> 
                             </div>
                             <a href="{% url 'App_Order:add' pk=product_id %}" class="theme-btn-s2">Add to cart</a>
                             <a href="#" class="wl-btn"><i class="fi flaticon-heart"></i></a>
