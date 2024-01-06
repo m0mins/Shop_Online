@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    # Add other configuration for your web service
+
+  db:
+    image: postgres:16.0  # Use the PostgreSQL image from Docker Hub
+    environment:
+      POSTGRES_DB: "ShopOnlineDB"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "Pass@99"
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    # Add other configuration for your PostgreSQL container
+
+#volumes:
+  #postgres_data:  # Define a named volume for PostgreSQL data
