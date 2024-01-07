@@ -5,11 +5,12 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 RUN apt update
-RUN apt install -y nginx
+#RUN apt install -y nginx
 
-RUN rm /etc/nginx/sites-available/default
+#RUN rm /etc/nginx/sites-available/default
 
-COPY scripts/default.conf /etc/nginx/sites-available/default
+#COPY scripts/default.conf /etc/nginx/sites-available/default
+
 
 
 COPY . .
@@ -17,4 +18,5 @@ COPY . .
 RUN chmod +x ./entrypoint.sh
 
 
-CMD /bin/sh -c "./entrypoint.sh && nginx -g 'daemon off;' & python manage.py runserver 0.0.0.0:8000"
+CMD ["./entrypoint.sh", "python", "manage.py", "runserver", "0.0.0.0:8000"]
+
