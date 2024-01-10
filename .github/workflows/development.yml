@@ -15,5 +15,6 @@ jobs:
         
     - name: SSH
       run: |
-        echo "${{ secrets.SSH_GITHUB_PRIVATE_KEY }}"
-        ssh -o StrictHostKeyChecking=no ubuntu@18.141.173.32 './scripts.sh'
+        echo "${{ secrets.SSH_GITHUB_PRIVATE_KEY }}" > private_key.pem
+        chmod 600 private_key.pem
+        ssh -o StrictHostKeyChecking=no -i private_key.pem ubuntu@18.141.173.32 './scripts.sh'
