@@ -1,0 +1,19 @@
+name: Django CI/CD
+
+on:
+  push:
+    branches:
+      - development
+
+jobs:
+  development-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+        
+    - name: SSH
+      run: |
+        echo "${{ secrets.SSH_GITHUB_PRIVATE_KEY }}"
+        ssh -o StrictHostKeyChecking=no ubuntu@18.141.173.32 './scripts.sh'
