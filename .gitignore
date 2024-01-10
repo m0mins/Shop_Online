@@ -17,8 +17,8 @@ __pycache__/
 
 # Directories
 postgres_data
-#media/
-#static/
+medias
+#static
 
 # Secret key
 *.secret_key
