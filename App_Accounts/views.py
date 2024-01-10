@@ -44,12 +44,14 @@ def register(request):
     return render(request, 'App_Accounts/registration.html')
 
 
-def send_emails(email,auth_token):
+def send_emailss(email,auth_token):
     subject='Account verify link'
+    base_url = settings.BASE_URL
     message=f'Hi clink the link to create your account http://127.0.0.1:8000/accounts/verify/{auth_token}'
     email_from=settings.EMAIL_HOST_USER
     recipient=[email]
     send_mail(subject,message,email_from,recipient)
+
 
 def send_email(email, auth_token):
     base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
@@ -58,7 +60,7 @@ def send_email(email, auth_token):
     verify_url = reverse('verify_account', kwargs={'auth_token': auth_token, 'email': email})
 
     # Combine the base URL and the dynamically generated URL
-    full_url = base_url + verify_url
+    full_url = f'{base_url}{verify_url}'
 
     subject = 'Account verify link'
     message = f'Hi, click the link to create your account: {full_url}'
