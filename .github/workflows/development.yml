@@ -17,4 +17,4 @@ jobs:
       
     - name: SSH
       run: |
-        ssh -o StrictHostKeyChecking=no -i ubuntu@18.141.173.32 './scripts.sh'
+        ssh -o StrictHostKeyChecking=no ubuntu@18.141.173.32 './scripts.sh'
