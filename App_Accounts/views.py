@@ -44,9 +44,10 @@ def register(request):
     return render(request, 'App_Accounts/registration.html')
 
 
-def send_email(email,auth_token):
+def send_email(request,email,auth_token):
     subject='Account verify link'
-    message=f'Hi clink the link to create your account http://127.0.0.1:8000/accounts/verify/{auth_token}'
+    base_url = request.build_absolute_uri('/')
+    message=f'Hi clink the link to create your account base_url/accounts/verify/{auth_token}'
     email_from=settings.EMAIL_HOST_USER
     recipient=[email]
     send_mail(subject,message,email_from,recipient)
