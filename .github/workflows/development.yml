@@ -12,12 +12,9 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-
-    - name: Set up SSH
-      uses: webfactory/ssh-agent@v0.5.5
       with:
         ssh-private-key: ${{ secrets.SSH_GITHUB_PRIVATE_KEY }}
-        
+      
     - name: SSH
       run: |
         ssh -o StrictHostKeyChecking=no -i ubuntu@18.141.173.32 './scripts.sh'
