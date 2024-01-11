@@ -9,24 +9,29 @@
     <h3> Products of {{ selected_subcategory.title }}</h3>
     {% for product in subcategory_products %}
 
-    <div class="col-md-6 col-sm-12 col-lg-3">
-      <figure class="card card-product">
-        <div class="img-wrap">
-          <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
-        </div>
-        <figcaption class="info-wrap">
-          <h5 class="title"><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h5>
-       
-          <div class="action-wrap">
-            <div class="price-wrap h5">
-            <span class="price-new">&#2547; {{product.price|floatformat:2}}</span>
-            <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
-            </div>
+    <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+      <div class="product-item">
+          <div class="image">
+              <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
+              <div class="tag new">New</div>
           </div>
-        </figcaption>
-        
-      </figure>
-    </div>
+          <div class="text">
+              <h2><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h2>
+              <div class="rating-product">
+                  <i class="fi flaticon-star"></i>
+                  <i class="fi flaticon-star"></i>
+                  <i class="fi flaticon-star"></i>
+                  <i class="fi flaticon-star"></i>
+                  <i class="fi flaticon-star"></i>
+                  <span>130</span>
+              </div>
+              <div class="price">
+                  <span class="present-price">&#2547; {{product.price|floatformat:2}}</span>
+                  <del class="old-price">&#2547; {{product.old_price|floatformat:2}}</del>
+              </div>
+          </div>
+      </div>
+  </div>
  {% endfor %}
     {% endif %}
   </div>
@@ -36,24 +41,29 @@
     <div class="row">
       {% for product in products %}
 
-      <div class="col-md-6 col-sm-12 col-lg-3">
-        <figure class="card card-product">
-          <div class="img-wrap">
-            <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
-          </div>
-          <figcaption class="info-wrap">
-            <h5 class="title"><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h5>
-         
-            <div class="action-wrap">
-              <div class="price-wrap h5">
-              <span class="price-new">&#2547; {{product.price|floatformat:2}}</span>
-              <span class="price-old"><strike>&#2547; {{product.old_price|floatformat:2}}</strike></span>
-              </div>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-12">
+        <div class="product-item">
+            <div class="image">
+                <img src="{{product.mainimage.url}}" style="width:100%; height:300px;">
+                <div class="tag new">New</div>
             </div>
-          </figcaption>
-          
-        </figure>
-      </div>
+            <div class="text">
+                <h2><a href="{% url 'App_Products:single_product' pk=product.id %}">{{ product.name }}</a></h2>
+                <div class="rating-product">
+                    <i class="fi flaticon-star"></i>
+                    <i class="fi flaticon-star"></i>
+                    <i class="fi flaticon-star"></i>
+                    <i class="fi flaticon-star"></i>
+                    <i class="fi flaticon-star"></i>
+                    <span>130</span>
+                </div>
+                <div class="price">
+                    <span class="present-price">&#2547; {{product.price|floatformat:2}}</span>
+                    <del class="old-price">&#2547; {{product.old_price|floatformat:2}}</del>
+                </div>
+            </div>
+        </div>
+    </div>
    {% endfor %}
    {% endif %}
     </div>
