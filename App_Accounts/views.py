@@ -159,7 +159,7 @@ def profile_update(request):
             form.save(commit=True)
             messages.success(request, "Profile Updated Successfully!!")
             return redirect("App_Home:home")
-    return render(request, 'App_Accounts/profile_update.html', context={'form':form})
+    return render(request, 'App_Accounts/profile_update2.html', context={'form':form})
 
 def profile2(request):
     return render(request,'App_Accounts/profile2.html')
