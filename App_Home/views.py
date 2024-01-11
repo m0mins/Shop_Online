@@ -5,13 +5,38 @@ import requests
 # Create your views here.
 def home(request):
     slider=Slider.objects.all()
-    product_url = 'http://127.0.0.1:8000/products/all_products'
-    product_response = requests.get(product_url)
-    product_content = product_response.text 
     categories=Category.objects.all()
     categories_with_subcategories = {}
+
+    products = Product.objects.all()
+    product_details = []
+
+    for product in products:
+        #for product, category in zip(products, categories):
+        size_variants = product.size_variants.all()
+        color_variants = product.color_variants.all()
+        product_detail = {
+            'products':products,
+            'name': product.name,
+            'sku':product.sku,
+            'price':product.price,
+            'old_price':product.old_price,
+            'mainimage':product.mainimage,
+            'category':product.category.title,
+            'sizes': [size_variant.size.name for size_variant in size_variants],
+            'colors':[color_variant.color.name for color_variant in color_variants]
+        }
+
+        product_details.append(product_detail)
+    combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
     for category in categories:
         subcategories = Sub_Category.objects.filter(categorys=category)
         categories_with_subcategories[category] = subcategories
+    #return {
+        #'slider':slider,
+        #'categories_with_subcategories':categories_with_subcategories,
+        #'combined_data':combined_data,
+    #}
 
-    return render(request,'App_Home/home.html',context={'slider':slider,'product_content':product_content,'categories_with_subcategories': categories_with_subcategories})
+    return render(request,'App_Home/home.html',context={'slider':slider,'categories_with_subcategories': categories_with_subcategories,'combined_data':combined_data})

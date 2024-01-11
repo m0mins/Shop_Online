@@ -1,4 +1,5 @@
 {% extends 'base2.html' %}
+{% load static%}
 {%load crispy_forms_tags%}
 {%block title_block%} Profile {%endblock%}
 {% block body_block %}
@@ -12,12 +13,13 @@
                                         {% if user.profile.image %}
                                         <img id="previewImage" src="/media/{{ user.profile.image }}" alt="" />
                                         {% else %}
-                                        <img id="previewImage" src="/media/default.png" alt="" />
+                                        <img id="previewImage" src="{% static 'media/default.png' %}" alt="" />
+
                                         {% endif %}
                                         <div class="file btn btn-lg btn-primary">
                                                 Change Photo
-                                                <input type="file" name="photo" id="photoInput"
-                                                        onchange="previewImage()" />
+                                                <input type="file" name="image" id="photoInput" oninput="previewImage()" />
+                                       
                                         </div>
                                 </div>
                         </div>

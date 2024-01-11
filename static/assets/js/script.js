@@ -1299,23 +1299,12 @@
 // js/scripts.js
 // js/scripts.js
 function previewImage() {
-    var preview = document.getElementById('previewImage');
-    var fileInput = document.getElementById('photoInput');
+    const image = document.querySelector('#photoInput').files[0];
+    const reader = new FileReader();
 
-    console.log('File input:', fileInput.files[0]);
-
-    var reader = new FileReader();
-
-    reader.onload = function (e) {
-        console.log('File reader onload:', e);
-        preview.src = e.target.result;
+    reader.onload = function(e) {
+        document.querySelector('#previewImage').src = e.target.result;
     };
 
-    reader.onerror = function (e) {
-        console.error('File reader error:', e);
-    };
-
-    if (fileInput.files[0]) {
-        reader.readAsDataURL(fileInput.files[0]);
-    }
+    reader.readAsDataURL(image);
 }
