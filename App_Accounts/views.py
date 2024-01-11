@@ -44,15 +44,6 @@ def register(request):
     return render(request, 'App_Accounts/registration.html')
 
 
-def send_emailss(email,auth_token):
-    subject='Account verify link'
-    base_url = settings.BASE_URL
-    message=f'Hi clink the link to create your account http://127.0.0.1:8000/accounts/verify/{auth_token}'
-    email_from=settings.EMAIL_HOST_USER
-    recipient=[email]
-    send_mail(subject,message,email_from,recipient)
-
-
 def send_email(email, auth_token):
     base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
 
@@ -118,10 +109,18 @@ def forgot_pass(request):
     return render(request,'App_Accounts/forgot.html')
 
 def reset_send_email(email,auth_token):
-    subject='Reset Password link'
-    message=f'Hi clink the link to Reset Your Password http://127.0.0.1:8000/accounts/reset_verify/{auth_token}'
-    email_from=settings.EMAIL_HOST_USER
-    recipient=[email]
+    base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
+
+    # Use reverse to dynamically generate the URL based on your URL patterns
+    verify_url = reverse('App_Accounts:reset_verify', kwargs={'auth_token': auth_token})
+
+    # Combine the base URL and the dynamically generated URL
+    full_url = f'{base_url}{verify_url}'
+
+    subject = 'Reset password link'
+    message = f'Hi, click the link to reset your password: {full_url}'
+    email_from = settings.EMAIL_HOST_USER
+    recipient = [email]
     send_mail(subject,message,email_from,recipient)
 
 def reset_verify(request,auth_token):
