@@ -9,16 +9,15 @@
                 <div class="col-lg-2">
                     <div class="navbar-header">
                         <a class="navbar-brand" href="{% url 'App_Home:home' %}"><img src="{% static 'assets/images/logo.svg'%}"
-                                alt="logo"></a>
+                                    alt="logo"></a>
                     </div>
                 </div>           
                 <div class="col-lg-4 col-12">
-                    <div class="middle-right">
+                    </div>
+                <div class="col-lg-6 col-12 text-right"> <div class="middle-right">
                         <ul>
                             {%if user.is_authenticated%}
-                                                                   
                             <li><a href="{% url 'App_Accounts:logout' %}"><i class="fi flaticon-user-profile"></i><span>Logout</span></a></li>
-
                             {%endif%}                              
                         </ul>
                     </div>
@@ -26,6 +25,7 @@
             </div>
         </div>
     </div>
+    
     <!--  end header-middle -->
     <div class="wpo-site-header">
         <nav class="navigation navbar navbar-expand-lg navbar-light">

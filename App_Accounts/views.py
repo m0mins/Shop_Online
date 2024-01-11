@@ -16,6 +16,8 @@ from django.contrib.auth import update_session_auth_hash
 # Forms and Models
 from App_Accounts.forms import ProfileForm
 from App_Accounts.models import Profile
+from django.core.files.storage import default_storage
+from django.core.files.base import ContentFile
 #from App_Login.forms import ProfileForm, SignUpForm
 
 # Messages
@@ -163,4 +165,25 @@ def profile_update(request):
 
 def profile2(request):
     return render(request,'App_Accounts/profile2.html')
+
+@login_required
+def profile_update2(request):
+    user = request.user
+    profile_instance = Profile.objects.get(user=user)
+
+    if request.method == 'POST':
+        # Update the profile instance with the new data from the form
+        profile_instance.full_name = request.POST.get('full_name')
+        profile_instance.address_1 = request.POST.get('address_1')
+        profile_instance.country = request.POST.get('country')
+        profile_instance.city = request.POST.get('city')
+        profile_instance.zipcode = request.POST.get('zipcode')
+
+        if 'image' in request.FILES:       
+            profile_instance.image = request.FILES['image']
+        # Add other fields as needed
+        profile_instance.save()
+        return redirect("App_Home:home") # Redirect to a view showing the updated profile
+
+    return render(request, 'App_Accounts/profile_update2.html', {'profile_instance': profile_instance})
     
