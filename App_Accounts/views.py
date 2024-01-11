@@ -57,7 +57,7 @@ def send_email(email, auth_token):
     base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
 
     # Use reverse to dynamically generate the URL based on your URL patterns
-    verify_url = reverse('App_Accounts:verify_account', kwargs={'auth_token': auth_token, 'email': email})
+    verify_url = reverse('App_Accounts:verify_account', kwargs={'auth_token': auth_token})
 
     # Combine the base URL and the dynamically generated URL
     full_url = f'{base_url}{verify_url}'
