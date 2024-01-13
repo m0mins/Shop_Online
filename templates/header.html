@@ -160,7 +160,7 @@
                             <li>
                                 <div class="mini-cart">
                                     <button class="cart-toggle-btn"> <i class="fi flaticon-add-to-cart"></i>
-                                        <span class="cart-count">9</span></button>
+                                        <span class="cart-count">{{ request.user | cart_total }}</span></button>
                                     <div class="mini-cart-content">
                                         <button class="mini-cart-close"><i class="ti-close"></i></button>
                                         <div class="mini-cart-items">
