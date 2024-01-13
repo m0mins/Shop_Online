@@ -87,7 +87,7 @@
                                 <a class="nav-link dropdown-toggle" href="{% url 'App_Accounts:customer_details' pk=user.pk%}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> <img src="/media/{{user.profile.image}}" width="40px" height="40px"class="rounded-circle"></a>
 
                                 {%else%}
-                                <a class="nav-link dropdown-toggle" href="{% url 'App_Accounts:customer_details' pk=user.pk%}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> <img src="/media/default.png" width="40px" height="40px"class="rounded-circle"></a>
+                                <a class="nav-link dropdown-toggle" href="{% url 'App_Accounts:customer_details' pk=user.pk%}" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user-tie"></i> <img src="{% static 'assets/images/profile/default.png'%}" width="40px" height="40px"class="rounded-circle"></a>
                                 {%endif%}
                                 <div class="dropdown-menu" aria-labelledby="nabbarDropdown">
                                   <a class="dropdown-item" href="">Profile</a>
