@@ -22,17 +22,17 @@ def add_to_cart(request, pk):
             order_item[0].quantity += 1
             order_item[0].save()
             messages.info(request, "This item quantity was updated.")
-            return redirect("App_Products:all_products")
+            return redirect("App_Home:home")
         else:
             order.orderitems.add(order_item[0])
             messages.info(request, "This item was added to your cart.")
-            return redirect("App_Products:all_products")
+            return redirect("App_Home:home")
     else:
         order = Order(user=request.user)
         order.save()
         order.orderitems.add(order_item[0])
         messages.info(request, "This item was added to your cart.")
-        return redirect("App_Products:all_products")
+        return redirect("App_Home:home")
     
 
 @login_required
@@ -44,7 +44,7 @@ def cart_view(request):
         return render(request, 'App_Order/cart.html', context={'carts':carts, 'order':order})
     else:
         messages.warning(request, "You don't have any item in your cart!")
-        return redirect("App_Products:all_products")
+        return redirect("App_Home:home")
 
 @login_required
 def remove_from_cart(request, pk):
@@ -60,10 +60,10 @@ def remove_from_cart(request, pk):
             return redirect("App_Order:cart")
         else:
             messages.info(request, "This item was not in your cart.")
-            return redirect("App_Products:all_products")
+            return redirect("App_Home:home")
     else:
         messages.info(request, "You don't have an active order")
-        return redirect("App_Products:all_products")
+        return redirect("App_Home:home")
     
 @login_required
 def increase_cart(request, pk):
@@ -81,10 +81,10 @@ def increase_cart(request, pk):
                 return redirect("App_Order:cart")
         else:
             messages.info(request, f"{item.name} is not in your cart")
-            return redirect("App_Shop:home")
+            return redirect("App_Home:home")
     else:
         messages.info(request, "You don't have an active order")
-        return redirect("App_Shop:home")
+        return redirect("App_Home:home")
 
 
 @login_required
@@ -107,7 +107,7 @@ def decrease_cart(request, pk):
                 return redirect("App_Order:cart")
         else:
             messages.info(request, f"{item.name} is not in your cart")
-            return redirect("App_Products:all_products")
+            return redirect("App_Home:home")
     else:
         messages.info(request, "You don't have an active order")
-        return redirect("App_Products:all_products")
+        return redirect("App_Home:home")
