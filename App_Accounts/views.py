@@ -98,7 +98,7 @@ def logout_user(request):
 def customerDetails(request, pk):
     customerId = User.objects.get(id=pk)
     context = {'customerId':customerId}
-    return render(request, 'App_Accounts/profile2.html', context)
+    return render(request, 'App_Accounts/profile.html', context)
 
 
 def forgot_pass(request):
@@ -151,23 +151,9 @@ def reset_verify(request,auth_token):
         messages.success(request, "Wrong Email Address!")
         return render(request,'App_Accounts/forgot.html')
 
+
 @login_required
 def profile_update(request):
-    current_user = Profile.objects.get(user=request.user)
-    form = ProfileForm(instance=current_user)
-    if request.method == 'POST':
-        form = ProfileForm(request.POST,request.FILES, instance=current_user)
-        if form.is_valid():
-            form.save(commit=True)
-            messages.success(request, "Profile Updated Successfully!!")
-            return redirect("App_Home:home")
-    return render(request, 'App_Accounts/profile_update2.html', context={'form':form})
-
-def profile2(request):
-    return render(request,'App_Accounts/profile2.html')
-
-@login_required
-def profile_update2(request):
     user = request.user
     profile_instance = Profile.objects.get(user=user)
 
@@ -185,5 +171,5 @@ def profile_update2(request):
         profile_instance.save()
         return redirect("App_Home:home") # Redirect to a view showing the updated profile
 
-    return render(request, 'App_Accounts/profile_update2.html', {'profile_instance': profile_instance})
+    return render(request, 'App_Accounts/profile_update.html', {'profile_instance': profile_instance})
     
