@@ -88,3 +88,6 @@ def single_product(request, pk):
     }
 
     return render(request, 'App_Products/single_product.html', context)
+
+def shop(request):
+     return render(request,"App_Products/shop.html")
