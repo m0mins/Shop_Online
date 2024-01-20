@@ -169,7 +169,9 @@ def profile_update(request):
             profile_instance.image = request.FILES['image']
         # Add other fields as needed
         profile_instance.save()
-        return redirect("App_Home:home") # Redirect to a view showing the updated profile
+        return redirect(request.META['HTTP_REFERER'])
+
+        #return redirect("App_Home:home") # Redirect to a view showing the updated profile
 
     return render(request, 'App_Accounts/profile_update.html', {'profile_instance': profile_instance})
     

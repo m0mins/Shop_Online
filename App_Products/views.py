@@ -89,5 +89,30 @@ def single_product(request, pk):
 
     return render(request, 'App_Products/single_product.html', context)
 
-def shop(request):
-     return render(request,"App_Products/shop.html")
+def shop_products(request):
+
+      
+    products = Product.objects.all()
+    product_details = []
+
+    for product in products:
+        size_variants = product.size_variants.all()
+        color_variants = product.color_variants.all()
+        product_detail = {
+            'products':products,
+            'name': product.name,
+            'sku':product.sku,
+            'price':product.price,
+            'old_price':product.old_price,
+            'mainimage':product.mainimage,
+            'category':product.category.title,
+            'sizes': [size_variant.size.name for size_variant in size_variants],
+            'colors':[color_variant.color.name for color_variant in color_variants]
+        }
+
+        product_details.append(product_detail)
+    combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data}
+
+    return render(request, 'App_Products/shop_products.html', context)
