@@ -155,15 +155,16 @@
                         <div class="shop-filter-item new-product">
                             <h2>New Products</h2>
                             <ul>
+                                {% for data in new_added %}
                                 <li>
                                     <div class="product-card">
                                         <div class="card-image">
                                             <div class="image">
-                                                <img src="assets/images/new-product/1.png" alt="">
+                                                <img src="{{data.mainimage.url}}" alt="">
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h3><a href="product.html">Stylish Pink Coat</a></h3>
+                                            <h3><a href="{% url 'App_Products:single_product' pk=data.id %}">{{data.name}}</a></h3>
                                             <div class="rating-product">
                                                 <i class="fi flaticon-star"></i>
                                                 <i class="fi flaticon-star"></i>
@@ -173,60 +174,13 @@
                                                 <span>30</span>
                                             </div>
                                             <div class="price">
-                                                <span class="present-price">$120.00</span>
-                                                <del class="old-price">$200.00</del>
+                                                <span class="present-price">&#2547; {{data.price|floatformat:2}}</span>
+                                                <del class="old-price">&#2547; {{data.old_price|floatformat:2}}</del>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="product-card">
-                                        <div class="card-image">
-                                            <div class="image">
-                                                <img src="assets/images/new-product/2.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h3><a href="product.html">Blue Bag</a></h3>
-                                            <div class="rating-product">
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <span>30</span>
-                                            </div>
-                                            <div class="price">
-                                                <span class="present-price">$120.00</span>
-                                                <del class="old-price">$200.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="product-card">
-                                        <div class="card-image">
-                                            <div class="image">
-                                                <img src="assets/images/new-product/3.png" alt="">
-                                            </div>
-                                        </div>
-                                        <div class="content">
-                                            <h3><a href="product.html">Kids Blue Shoes</a></h3>
-                                            <div class="rating-product">
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <i class="fi flaticon-star"></i>
-                                                <span>30</span>
-                                            </div>
-                                            <div class="price">
-                                                <span class="present-price">$120.00</span>
-                                                <del class="old-price">$200.00</del>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                {% endfor %}                 
                             </ul>
                         </div>
                     </div>

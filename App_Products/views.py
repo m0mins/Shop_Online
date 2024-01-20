@@ -93,6 +93,7 @@ def shop_products(request):
 
       
     products = Product.objects.all()
+    new_added=(products[::-1])[:3]
     product_details = []
 
     for product in products:
@@ -113,6 +114,6 @@ def shop_products(request):
         product_details.append(product_detail)
     combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
 
-    context = {'combined_data': combined_data}
+    context = {'combined_data': combined_data,'new_added':new_added}
 
     return render(request, 'App_Products/shop_products.html', context)
