@@ -90,10 +90,9 @@ def single_product(request, pk):
     return render(request, 'App_Products/single_product.html', context)
 
 def shop_products(request):
-
-      
+        
     products = Product.objects.all()
-    new_added=(products[::-1])[:3]
+    new_added=products.order_by('-id')[:3]
     product_details = []
 
     for product in products:
