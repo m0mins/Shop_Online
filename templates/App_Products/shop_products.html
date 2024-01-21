@@ -1,7 +1,6 @@
 {% extends 'base.html'%}
 {% load static %}
 {% load cart_tags %}
-
 {% block title_block %} ShopOnline {% endblock %}
 {% block body_block %}
 <div class="shop-section">
@@ -26,7 +25,8 @@
                             <h2>Categories</h2>
                             <ul>
                                 {% for category in categories%}
-                                <li><a href="{% url 'App_Products:filter_by_category' category_name=category.title %}">{{category.title}}<span> ({{ category | get_product_count }}) </span></a></li>
+                                <li><a href="{% url 'App_Products:filter_by_category' category_name=category.title %}">{{category.title}}<span>
+                                            ({{ category | get_product_count }}) </span></a></li>
                                 {%endfor%}
                             </ul>
                         </div>
@@ -39,7 +39,8 @@
                                     <!--
                                     <form action="#" method="get" class="clearfix">
                                         -->
-                                    <form method="POST" action="{% url 'App_Products:search_by_price' %}" class="clearfix">
+                                    <form method="POST" action="{% url 'App_Products:search_by_price' %}"
+                                        class="clearfix">
                                         {% csrf_token %}
 
                                         <!-- <div id="sliderRange"></div>
@@ -50,12 +51,13 @@
                                         <div class="d-flex">
                                             <div class="col-lg-6 pe-2">
                                                 <label for="" class="form-label">Min</label>
-                                                <input type="text" class="form-control" placeholder="Min" value="0" name="min">
+                                                <input type="text" class="form-control" placeholder="Min" value="0"
+                                                    name="min">
                                             </div>
                                             <div class="col-lg-6">
                                                 <label for="" class="form-label">Max</label>
-                                                <input type="text" class="form-control" placeholder="Max"
-                                                    value="100000" name="max">
+                                                <input type="text" class="form-control" placeholder="Max" value="100000"
+                                                    name="max">
                                             </div>
                                         </div>
                                         <div class="col-lg-12 mt-4">
@@ -70,49 +72,15 @@
                         <div class="shop-filter-item">
                             <h2>Color</h2>
                             <ul>
+                                {% for color in all_colors%}
                                 <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Green <span>(21)</span>
+                                    <label class="topcoat-radio-button__label">{{color}}<span>({{ color | product_count_by_color }})</span>
                                         <input type="radio" name="topcoat2">
                                         <span class="topcoat-radio-button"></span>
                                     </label>
                                 </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Blue <span>(24)</span>
-                                        <input type="radio" name="topcoat2">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Red<span>(13)</span>
-                                        <input type="radio" name="topcoat2">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Brown<span>(27)</span>
-                                        <input type="radio" name="topcoat2">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Yellow<span>(12)</span>
-                                        <input type="radio" name="topcoat2">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        White<span>(32)
-                                        </span>
-                                        <input type="radio" name="topcoat2">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
+                                {% endfor %}
+
                             </ul>
                         </div>
                     </div>
@@ -120,34 +88,14 @@
                         <div class="shop-filter-item">
                             <h2>Size</h2>
                             <ul>
+                                {% for size in all_sizes%}
                                 <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Small <span>(10)</span>
+                                    <label class="topcoat-radio-button__label">{{size}}<span>({{ size | product_count_by_size }})</span>
                                         <input type="radio" name="topcoat3">
                                         <span class="topcoat-radio-button"></span>
                                     </label>
                                 </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Medium<span>(24)</span>
-                                        <input type="radio" name="topcoat3">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Large<span>(13)</span>
-                                        <input type="radio" name="topcoat3">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
-                                <li>
-                                    <label class="topcoat-radio-button__label">
-                                        Extra Large<span>(18)</span>
-                                        <input type="radio" name="topcoat3">
-                                        <span class="topcoat-radio-button"></span>
-                                    </label>
-                                </li>
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -164,7 +112,9 @@
                                             </div>
                                         </div>
                                         <div class="content">
-                                            <h3><a href="{% url 'App_Products:single_product' pk=data.id %}">{{data.name}}</a></h3>
+                                            <h3><a
+                                                    href="{% url 'App_Products:single_product' pk=data.id %}">{{data.name}}</a>
+                                            </h3>
                                             <div class="rating-product">
                                                 <i class="fi flaticon-star"></i>
                                                 <i class="fi flaticon-star"></i>
@@ -180,7 +130,7 @@
                                         </div>
                                     </div>
                                 </li>
-                                {% endfor %}                 
+                                {% endfor %}
                             </ul>
                         </div>
                     </div>
@@ -235,7 +185,7 @@
                                     <div class="tag new">New</div>
                                 </div>
                                 <div class="text">
-                                    <h2><a href="{% url 'App_Products:single_product' pk=data.object.id %}">{{data.product_name.name }}</a></h2>
+                                    <h2><a href="{% url 'App_Products:single_product' pk=data.object.id %}">{{data.product_name.name}}</a></h2>
                                     <div class="rating-product">
                                         <i class="fi flaticon-star"></i>
                                         <i class="fi flaticon-star"></i>
@@ -245,22 +195,13 @@
                                         <span>130</span>
                                     </div>
                                     <div class="price">
-                                        <span class="present-price">&#2547;
-                                            {{data.product_name.price|floatformat:2}}</span>
-                                        <del class="old-price">&#2547;
-                                            {{data.product_name.old_price|floatformat:2}}</del>
+                                        <span class="present-price">&#2547;{{data.product_name.price|floatformat:2}}</span>
+                                        <del class="old-price">&#2547;{{data.product_name.old_price|floatformat:2}}</del>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         {% endfor %}
-
-
-
-
-
-
-
 
                     </div>
                 </div>

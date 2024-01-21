@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect,get_object_or_404,Http404
 from django.views.generic import ListView, DetailView
 
-from App_Products.models import Product,Product_Size,Category,Sub_Category
+from App_Products.models import Product,Product_Size,Category,Sub_Category,Size,Color
 from App_Order.models import Cart
-
+from django.db.models import Count
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 
@@ -228,7 +228,40 @@ def filter_by_category(request,category_name):
     context = {'combined_data': combined_data,'num_of_products':num_of_products}
           
     return render(request, 'App_Products/shop_products.html', context)
-         
+    
+
+def filter_by_size(request,size_name):
+    #size_counts = Size.objects.annotate(product_count=Count('product_size'))
+    
+    size = Size.objects.get(name=size_name)
+    products = Product_Size.objects.filter(size=size)
+
+
+    num_of_products=products.count()
+    product_details = []
+    if products:
+        for product in products:
+                size_variants = product.size_variants.all()
+                color_variants = product.color_variants.all()
+                product_detail = {
+                    'products':products,
+                    'name': product.name,
+                    'sku':product.sku,
+                    'price':product.price,
+                    'old_price':product.old_price,
+                    'mainimage':product.mainimage,
+                    'category':product.category.title,
+                    'sizes': [size_variant.size.name for size_variant in size_variants],
+                    'colors':[color_variant.color.name for color_variant in color_variants]
+                }
+                product_details.append(product_detail)
+                
+                
+        combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data,'num_of_products':num_of_products}
+          
+    return render(request, 'App_Products/shop_products.html', context)
 
 
      
