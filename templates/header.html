@@ -55,22 +55,24 @@
                     </div>
                 </div>
                 <div class="col-lg-6 col-12">
-                    <form action="#" class="middle-box">
+                    <form method="POST" action="{% url 'App_Products:search_by_category' %}" class="middle-box">
+                        {% csrf_token %}
                         <div class="category">
+                            
                             <select name="service" class="form-control">
                                 <option disabled="disabled" selected="">All Category</option>
-                                <option>Men</option>
-                                <option>Women</option>
-                                <option>Kids</option>
-                                <option>Sales</option>
-                                <option>Perfect Cake</option>
+                                {% for category, subcategories in categories_with_subcategories.items %}
+
+                                <option>{{category.title}}</option>
+                             
+                                {%endfor%}
                                 <option>All Of The Above</option>
                             </select>
                         </div>
                         <div class="search-box">
                             <div class="input-group">
                                 <input type="search" class="form-control"
-                                    placeholder="What are you looking for?">
+                                    placeholder="What are you looking for?" name="search">
                                 <button class="search-btn" type="submit"> <i class="fi flaticon-search"></i>
                                 </button>
                             </div>

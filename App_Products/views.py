@@ -92,6 +92,7 @@ def single_product(request, pk):
 def shop_products(request):
         
     products = Product.objects.all()
+    #To see last 3 products
     new_added=products.order_by('-id')[:3]
     product_details = []
 
@@ -116,3 +117,52 @@ def shop_products(request):
     context = {'combined_data': combined_data,'new_added':new_added}
 
     return render(request, 'App_Products/shop_products.html', context)
+
+#def search_by_price(request):
+    
+    #price=get_object_or_404()
+
+def search_by_category(request):
+    #categories=Category.objects.all()
+    if request.method=='POST':
+        products=Product.objects.all()
+        product_details = []
+        num_of_products=products.count()
+        for product in products:
+            product_details.append(product)
+
+        category_name=request.POST.get('service')
+        search=request.POST.get('search')
+        
+        
+        if category_name:
+            category=Category.objects.get(title=category_name)
+            category_id = category.id
+            products=Product.objects.filter(category=category_id,name__icontains=search)
+            num_of_products=products.count()
+
+            
+            for product in products:
+                size_variants = product.size_variants.all()
+                color_variants = product.color_variants.all()
+                product_detail = {
+                    'products':products,
+                    'name': product.name,
+                    'sku':product.sku,
+                    'price':product.price,
+                    'old_price':product.old_price,
+                    'mainimage':product.mainimage,
+                    'category':product.category.title,
+                    'sizes': [size_variant.size.name for size_variant in size_variants],
+                    'colors':[color_variant.color.name for color_variant in color_variants]
+                }
+                product_details.append(product_detail)
+                
+                
+        combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data,'num_of_products':num_of_products}
+          
+    return render(request, 'App_Products/shop_products.html', context)
+
+
