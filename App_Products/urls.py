@@ -12,5 +12,7 @@ urlpatterns = [
     path('shop_products/',views.shop_products,name='shop_products'),
     path('search_by_category/',views.search_by_category,name='search_by_category'),
     path('search_by_price/',views.search_by_price,name='search_by_price'),
+    path('filter_by_category/<str:category_name>/', views.filter_by_category, name='filter_by_category'),
+
 
 ]

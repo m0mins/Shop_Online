@@ -92,6 +92,8 @@ def single_product(request, pk):
 def shop_products(request):
         
     products = Product.objects.all()
+    num_of_products=products.count()
+
     #To see last 3 products
     new_added=products.order_by('-id')[:3]
     product_details = []
@@ -114,7 +116,7 @@ def shop_products(request):
         product_details.append(product_detail)
     combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
 
-    context = {'combined_data': combined_data,'new_added':new_added}
+    context = {'combined_data': combined_data,'new_added':new_added,'num_of_products':num_of_products}
 
     return render(request, 'App_Products/shop_products.html', context)
 
@@ -197,3 +199,36 @@ def search_by_category(request):
     return render(request, 'App_Products/shop_products.html', context)
 
 
+def filter_by_category(request,category_name):
+    category=Category.objects.get(title=category_name)
+    category_id=category.id
+    products=Product.objects.filter(category=category_id)
+    num_of_products=products.count()
+    product_details = []
+    if products:
+        for product in products:
+                size_variants = product.size_variants.all()
+                color_variants = product.color_variants.all()
+                product_detail = {
+                    'products':products,
+                    'name': product.name,
+                    'sku':product.sku,
+                    'price':product.price,
+                    'old_price':product.old_price,
+                    'mainimage':product.mainimage,
+                    'category':product.category.title,
+                    'sizes': [size_variant.size.name for size_variant in size_variants],
+                    'colors':[color_variant.color.name for color_variant in color_variants]
+                }
+                product_details.append(product_detail)
+                
+                
+        combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data,'num_of_products':num_of_products}
+          
+    return render(request, 'App_Products/shop_products.html', context)
+         
+
+
+     

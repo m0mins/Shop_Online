@@ -26,7 +26,7 @@
                             <h2>Categories</h2>
                             <ul>
                                 {% for category in categories%}
-                                <li><a href="#">{{category.title}}<span> ({{ category | get_product_count }}) </span></a></li>
+                                <li><a href="{% url 'App_Products:filter_by_category' category_name=category.title %}">{{category.title}}<span> ({{ category | get_product_count }}) </span></a></li>
                                 {%endfor%}
                             </ul>
                         </div>
