@@ -1,5 +1,5 @@
 from django import template
-from App_Order.models import Order
+from App_Order.models import Order,Product
 
 register=template.Library()
 
@@ -9,5 +9,13 @@ def cart_total(user):
 
     if order.exists():
         return order[0].orderitems.count()
+    else:
+        return 0
+
+@register.filter
+def get_product_count(category):
+    products=Product.objects.filter(category=category)
+    if products.exists():
+        return products.count()
     else:
         return 0

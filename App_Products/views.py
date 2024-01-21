@@ -118,12 +118,43 @@ def shop_products(request):
 
     return render(request, 'App_Products/shop_products.html', context)
 
-#def search_by_price(request):
+def search_by_price(request):
+    if request.method=='POST':
+        products=Product.objects.all()
+        min_price=request.POST.get('min')
+        max_price=request.POST.get('max')
+        product_details = []
+        num_of_products=0
+
+        products_in_range = Product.objects.filter(price__range=(min_price, max_price))
+        num_of_products=products_in_range.count()
+        for product in products_in_range:
+                size_variants = product.size_variants.all()
+                color_variants = product.color_variants.all()
+
+                product_detail = {
+                    'products':products,
+                    'name': product.name,
+                    'sku':product.sku,
+                    'price':product.price,
+                    'old_price':product.old_price,
+                    'mainimage':product.mainimage,
+                    'category':product.category.title,
+                    'sizes': [size_variant.size.name for size_variant in size_variants],
+                    'colors':[color_variant.color.name for color_variant in color_variants]
+                }
+                product_details.append(product_detail)
+                
+                
+        combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data,'num_of_products':num_of_products}
+          
+    return render(request, 'App_Products/shop_products.html', context)
     
-    #price=get_object_or_404()
+    
 
 def search_by_category(request):
-    #categories=Category.objects.all()
     if request.method=='POST':
         products=Product.objects.all()
         product_details = []

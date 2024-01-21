@@ -10,5 +10,6 @@ def context_processor_data(request):
         categories_with_subcategories[category] = subcategories
     return{
         'slider':slider,
+        'categories':categories,
         'categories_with_subcategories':categories_with_subcategories
     }

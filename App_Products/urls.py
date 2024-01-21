@@ -11,4 +11,6 @@ urlpatterns = [
     path('single_product/<int:pk>/',views.single_product,name='single_product'),
     path('shop_products/',views.shop_products,name='shop_products'),
     path('search_by_category/',views.search_by_category,name='search_by_category'),
+    path('search_by_price/',views.search_by_price,name='search_by_price'),
+
 ]
