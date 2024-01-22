@@ -30,6 +30,7 @@ class Sub_Category(models.Model):
 
 class Color(models.Model):
     name=models.CharField(max_length=30)
+    #color_code=models.CharField(max_length=50)
 
     def __str__(self):
         return self.name
@@ -49,7 +50,7 @@ class Product(models.Model):
     name = models.CharField(max_length=264)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='category')
     sub_category = models.ForeignKey(Sub_Category, on_delete=models.CASCADE, null=True,blank=True, related_name='sub_category')
-    preview_text = models.TextField(max_length=200, verbose_name='Preview Text')
+    preview_text = models.TextField(max_length=400, verbose_name='Preview Text')
     detail_text = models.TextField(max_length=1000, verbose_name='Description')
     additional_info=models.TextField(max_length=1000, verbose_name='Additional Info')
     sku=models.CharField(max_length=30)

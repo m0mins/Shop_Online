@@ -11,9 +11,9 @@
                     <div class="filter-item">
                         <div class="shop-filter-item">
                             <div class="shop-filter-search">
-                                <form>
+                                <form method="GET" action="{% url 'App_Products:product_search' %}">
                                     <div>
-                                        <input type="text" class="form-control" placeholder="Search..">
+                                        <input type="text" class="form-control" placeholder="Search.." name="src">
                                         <button type="submit"><i class="ti-search"></i></button>
                                     </div>
                                 </form>

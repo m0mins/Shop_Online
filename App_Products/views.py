@@ -264,4 +264,47 @@ def filter_by_size(request,size_name):
     return render(request, 'App_Products/shop_products.html', context)
 
 
+def product_search(request):
+    if request.method=='GET':
+        products=Product.objects.all()
+        num_of_products=products.count()
+        product_details = []
+        search=request.GET.get('src')
+        if not search:  
+            for product in products:
+                product_details.append(product)
+
+
+             
+        else:
+             
+        # Perform a case-insensitive search on the 'name' field
+            results = Product.objects.filter(name__icontains=search)
+            num_of_products=results.count()
+            for product in results:
+                size_variants = product.size_variants.all()
+                color_variants = product.color_variants.all()
+                product_detail = {
+                    'products':results,
+                    'name': product.name,
+                    'sku':product.sku,
+                    'price':product.price,
+                    'old_price':product.old_price,
+                    'mainimage':product.mainimage,
+                    'category':product.category.title,
+                    'sizes': [size_variant.size.name for size_variant in size_variants],
+                    'colors':[color_variant.color.name for color_variant in color_variants]
+                }
+                product_details.append(product_detail)
+                
+                
+        combined_data = [{'object': obj, 'product_name': name} for obj, name in zip(products, product_details)]
+
+    context = {'combined_data': combined_data,'num_of_products':num_of_products}
+          
+    return render(request, 'App_Products/shop_products.html', context)
+        
+
+
+
      
