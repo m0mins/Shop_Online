@@ -35,49 +35,7 @@
     </ul>
 </div>
 <!-- end of wpo-hero-section -->
-<h1>This is main body </h1>
 
-<div class="container my-5">
-    <div class="product-wrap">
-
-        <div class="row">
-            {% for data in combined_data %}
-
-            <div class="col-lg-3 col-md-4 col-sm-6 col-12">
-                <div class="product-item">
-                    <div class="image">
-                        <img src="{{data.product_name.mainimage.url}}" style="width:100%; height:300px;">
-                        <div class="tag new">New</div>
-                    </div>
-                    <div class="text">
-                        <h2><a href="{% url 'App_Products:single_product' pk=data.object.id %}">{{ data.product_name.name }}</a></h2>
-                        <div class="rating-product">
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <i class="fi flaticon-star"></i>
-                            <span>130</span>
-                        </div>
-                        <div class="price">
-                            <span class="present-price">&#2547; {{data.product_name.price|floatformat:2}}</span>
-                            <del class="old-price">&#2547; {{data.product_name.old_price|floatformat:2}}</del>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-
-
-        </div>
-
-    </div>
-
-</div>
-
-
-
-<h1> Finished</h1>
 
 <!-- start of themart-featured-section -->
 <section class="themart-featured-section">
