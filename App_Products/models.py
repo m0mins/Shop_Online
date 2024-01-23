@@ -30,7 +30,7 @@ class Sub_Category(models.Model):
 
 class Color(models.Model):
     name=models.CharField(max_length=30)
-    #color_code=models.CharField(max_length=50)
+    color_code=models.CharField(max_length=50, null=True,blank=True)
 
     def __str__(self):
         return self.name
@@ -84,3 +84,4 @@ class Product_Image(models.Model):
 
     def __str__(self):
         return f"{self.product.name}"
+    

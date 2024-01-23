@@ -71,10 +71,11 @@
                                 <span>Color :</span>
                                 <ul>
                                     {% for color in colors %}
-                                    <li class="color1"><input id="a1" type="radio" name="color"value="30">
-                                        <label for="a1">{{color}}</label>
+                                    <li class="color1">
+                                        <input id="a{{ forloop.counter }}" type="radio" name="color" value="{{ color }}">
+                                        <label for="a{{ forloop.counter }}"style="background-color: {{ color }}"></label>
                                     </li>
-                                    {% endfor %}
+                                {% endfor %}                               
                                 </ul>
                             </div>
                         </div>
@@ -83,11 +84,12 @@
                                 <span>Sizes:</span>
                                 <ul>
                                     {% for size in sizes %}
-                                    <li class="color"><input id="sz1" type="radio" name="size" value="30">
-                                        <label for="sz1">{{size}}</label>
-
+                                    <li class="color">
+                                        <input id="sz{{ forloop.counter }}" type="radio" name="size" value="{{ size }}">
+                                        <label for="sz{{ forloop.counter }}">{{ size }}</label>
                                     </li>
-                                    {% endfor %}
+                                {% endfor %}
+                                
                                 </ul>
                             </div>
                         </div>
