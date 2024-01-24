@@ -80,7 +80,7 @@ def single_product(request, pk):
         'description': product.detail_text,
         'additional_info': product.additional_info,
         'sizes': [size_variant.size.name for size_variant in size_variants],
-        'colors': [color_variant.color.name for color_variant in color_variants],
+        'colors': [color_variant.color.color_code for color_variant in color_variants],
         'sku': product.sku,
         'category': product.category.title,
         'mainimage': product.mainimage,
