@@ -8,7 +8,7 @@ run.sh
 *.sqlite3
 *.db
 *.db-journal
-
+run.sh
 # Logs
 *.log
 
@@ -17,9 +17,10 @@ run.sh
 *~
 
 # Directories
-postgres_data
-media
+postgres_data/
+media/
 #static
+venv/
 
 # Secret key
 *.secret_key
@@ -31,7 +32,7 @@ media
 *.pyc
 
 # Ignore virtual environment
-venv/
+
 
 # Ignore local settings
 local_settings.py
