@@ -71,22 +71,13 @@
                                 <span>Color :</span>
                                 <ul>
                                    
-                                    <li class="color1"><input id="a1" type="radio" name="color" value="30">
-                                        <label for="a1"></label>
+                                    {% for color in colors %}
+                                    <li class="color1">
+                                        <input id="a{{ forloop.counter }}" type="radio" name="color" value="{{ color }}">
+                                        <label for="a{{ forloop.counter }}"style="background-color: {{ color }}"></label>
                                     </li>
-                                    <li class="color2"><input id="a2" type="radio" name="color" value="30">
-                                        <label for="a2"></label>
-                                    </li>
-                                    <li class="color3"><input id="a3" type="radio" name="color" value="30">
-                                        <label for="a3"></label>
-                                    </li>
-                                    <li class="color4"><input id="a4" type="radio" name="color" value="30">
-                                        <label for="a4"></label>
-                                    </li>
-                                    <li class="color5"><input id="a5" type="radio" name="color" value="30">
-                                        <label for="a5"></label>
-                                    </li>
-                                    
+                                {% endfor %}   
+
                                 </ul>
                             </div>
                         </div>
@@ -106,7 +97,7 @@
                         </div>
                         <div class="pro-single-btn">
                             <div class="quantity cart-plus-minus">
-                                <input class="text-value" type="text" value="1">
+                                <input class="text-value" type="text" name="quantity" value="1">
                                 <a class="dec qtybutton"  href="#">-</a>
                                        
                                 <a class="inc qtybutton" href="#">+</a> 
