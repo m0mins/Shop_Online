@@ -167,39 +167,37 @@
                                         {% endif %}
                                     <div class="mini-cart-content">
                                         <button class="mini-cart-close"><i class="ti-close"></i></button>
+                                       
+                                        {% with cart_info=request.user|sub_total %}
+                                      
                                         <div class="mini-cart-items">
+                                            {% for cart_item in cart_info.cart_items %}
                                             <div class="mini-cart-item clearfix">
                                                 <div class="mini-cart-item-image">
-                                                    <a href="product.html"><img src="{% static 'assets/images/cart/img-1.jpg'%}" alt></a>
+                                                    <a href="product.html"><img src="{{cart_item.item.mainimage.url}}" alt></a>
                                                 </div>
                                                 <div class="mini-cart-item-des">
-                                                    <a href="product.html">Stylish Pink Coat</a>
-                                                    <span class="mini-cart-item-price">$150 x 1</span>
+                                                    <a href="product.html">{{ cart_item.item.name }}</a>
+                                                    <span class="mini-cart-item-price">${{cart_item.item.price}} x {{ cart_item.quantity }}</span>
                                                     <span class="mini-cart-item-quantity"><a href="#"><i
                                                                 class="ti-close"></i></a></span>
                                                 </div>
                                             </div>
-                                            <div class="mini-cart-item clearfix">
-                                                <div class="mini-cart-item-image">
-                                                    <a href="product.html"><img
-                                                            src="{% static 'assets/images/cart/img-2.jpg'%}"
-                                                            alt></a>
-                                                </div>
-                                                <div class="mini-cart-item-des">
-                                                    <a href="product.html">Blue Bag</a>
-                                                    <span class="mini-cart-item-price">$120 x 2</span>
-                                                    <span class="mini-cart-item-quantity"><a href="#"><i
-                                                                class="ti-close"></i></a></span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            {%endfor%}
+                                        </div>                                                       
+                                        
                                         <div class="mini-cart-action clearfix">
                                             <span class="mini-checkout-price">Subtotal:
-                                                <span>$390</span></span>
+                                               
+                                                <span>&#2547;{{ cart_info.total_price }}</span></span>
+                                               
                                             <div class="mini-btn">
                                                 <a href="{% url 'App_Order:cart' %}" class="view-cart-btn">View Cart</a>
                                             </div>
                                         </div>
+                                        
+                                        {% endwith %}
+                                   
                                     </div>
                                 </div>
                             </li>
