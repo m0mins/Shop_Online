@@ -164,7 +164,7 @@
                                     {%if user.is_authenticated%}
                                     <button class="cart-toggle-btn"> <i class="fi flaticon-add-to-cart"></i>
                                         <span class="cart-count">{{ request.user | cart_total }}</span></button>
-                                        {% endif %}
+                                        
                                     <div class="mini-cart-content">
                                         <button class="mini-cart-close"><i class="ti-close"></i></button>
                                        
@@ -199,6 +199,7 @@
                                         {% endwith %}
                                    
                                     </div>
+                                    {% endif %}
                                 </div>
                             </li>
                         </ul>
