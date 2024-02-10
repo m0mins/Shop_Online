@@ -40,3 +40,7 @@ def home(request):
     #}
 
     return render(request,'App_Home/home.html',context={'combined_data':combined_data})
+
+
+def contact(request):
+    return render(request,'App_Home/contact.html')
