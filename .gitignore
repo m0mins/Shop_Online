@@ -11,7 +11,7 @@ run.sh
 run.sh
 # Logs
 *.log
-
+.python-version
 # Temporary files
 *.swp
 *~
@@ -27,7 +27,7 @@ venv/
 
 # Configuration files
 *.ini
-
+.env
 # Development
 *.pyc
 
