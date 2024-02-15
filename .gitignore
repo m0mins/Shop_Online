@@ -27,7 +27,7 @@ venv/
 
 # Configuration files
 *.ini
-.env
+
 # Development
 *.pyc
 
