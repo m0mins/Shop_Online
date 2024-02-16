@@ -16,9 +16,9 @@ services:
   db:
     image: postgres:16.0  # Use the PostgreSQL image from Docker Hub
     environment:
-      POSTGRES_DB: "ShopOnlineDB_test"
+      POSTGRES_DB: "ShopOnlineDB"
       POSTGRES_USER: "postgres"
-      POSTGRES_PASSWORD: "123456"
+      POSTGRES_PASSWORD: "Pass@99"
     ports:
       - "5432:5432"
     volumes:
