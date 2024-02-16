@@ -1,6 +1,8 @@
 from pathlib import Path
 from decouple import config
 import os
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -12,10 +14,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@+oiguv@le3@u#-3a!tj559s!)v3xyq*)yb0!thf-t*$($v7ea'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-
-ALLOWED_HOSTS = ['*']
-
+#load_dotenv()
+DEBUG = config('DEBUG')
+#DEBUG = False
+print("#####################")
+print(config)
+print(DEBUG)
+#ALLOWED_HOSTS = ['*']
+if DEBUG==True:
+    ALLOWED_HOSTS = []
+else:
+    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
@@ -126,11 +135,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = '/static/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/' 
+STATIC_URL = 'static/'
+MEDIA_URL = 'media/'
+STATICFILES_DIRS = [BASE_DIR / 'static', ]
+MEDIA_ROOT = BASE_DIR / 'media'
+
 LOGIN_URL='/accounts/login/'
 BASE_URL = 'http://18.141.173.32/'
 # Default primary key field type
