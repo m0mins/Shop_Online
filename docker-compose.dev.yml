@@ -9,6 +9,7 @@ services:
       - ./media:/app/media
     ports:
       - "80:80"
+      - "8000:8000"
     depends_on:
       - db
     # Add other configuration for your web service
