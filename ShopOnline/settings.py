@@ -82,26 +82,26 @@ WSGI_APPLICATION = 'ShopOnline.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-#DATABASES={
-#   'default':{
-#      'ENGINE':'django.db.backends.postgresql_psycopg2',
-#      'NAME':config('DATABASE_NAME'),
-#      'USER':config('DATABASE_USER'),
-#      'PASSWORD':config('DATABASE_PASSWORD'),
-#      'HOST':config('DATABASE_HOST'),
-#      'PORT':config('DATABASE_PORT'),
-#   }
-#}
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "ShopOnlineDB",
-        "USER": "postgres",
-        "PASSWORD": "Pass@99",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
+DATABASES={
+   'default':{
+      'ENGINE':'django.db.backends.postgresql_psycopg2',
+      'NAME':config('DATABASE_NAME'),
+      'USER':config('DATABASE_USER'),
+      'PASSWORD':config('DATABASE_PASSWORD'),
+      'HOST':config('DATABASE_HOST'),
+      'PORT':config('DATABASE_PORT'),
+   }
 }
+#DATABASES = {
+#    "default": {
+#        "ENGINE": "django.db.backends.postgresql",
+#        "NAME": "ShopOnlineDB",
+#        "USER": "postgres",
+#        "PASSWORD": "Pass@99",
+#        "HOST": "localhost",
+#        "PORT": "5432",
+#    }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
