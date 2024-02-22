@@ -15,16 +15,9 @@ SECRET_KEY = 'django-insecure-@+oiguv@le3@u#-3a!tj559s!)v3xyq*)yb0!thf-t*$($v7ea
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #load_dotenv()
-DEBUG = config('DEBUG')
+DEBUG = True
+ALLOWED_HOSTS = ['*']
 #DEBUG = False
-print("#####################")
-print(config)
-print(DEBUG)
-#ALLOWED_HOSTS = ['*']
-if DEBUG==True:
-    ALLOWED_HOSTS = []
-else:
-    ALLOWED_HOSTS = ['*']
 
 # Application definition
 
