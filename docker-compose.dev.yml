@@ -7,6 +7,9 @@ services:
       dockerfile: Dockerfile.dev
     volumes:
       - ./media:/app/media
+      - ./static:/app/static
+    #volumes:
+      #- ./static:/app/static
     ports:
       - "80:80"
       #- "8000:8000"
