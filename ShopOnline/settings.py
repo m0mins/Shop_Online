@@ -156,7 +156,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 
-LOGIN_URL='/accounts/login/'
+LOGIN_URL='accounts/login/'
 BASE_URL = 'http://18.141.173.32/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
