@@ -112,5 +112,6 @@ def decrease_cart(request, pk):
         messages.info(request, "You don't have an active order")
         return redirect("App_Home:home")
     
+@login_required  
 def checkout(request):
-    return render('App_Order/checkout.html')
+    return render( request,'App_Order/checkout.html')
