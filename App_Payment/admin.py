@@ -5,5 +5,5 @@ from App_Payment.models import BillingAddress
 admin.site.register(BillingAddress)
 
 class AdminBillingAddress(admin.ModelAdmin):
-    list_display=['user','address','zipcode','city','country']
+    list_display=['address','zipcode','city','country']
 admin.site.register(BillingAddress,AdminBillingAddress)
