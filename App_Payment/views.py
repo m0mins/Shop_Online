@@ -11,7 +11,8 @@ from django.contrib import messages
 # Create your views here.
 
 @login_required  
-def checkout(request,user):
+def checkout(request):
+    user=request.user
     order=Order.objects.filter(user=user,Ordered=False)
     if order.exists():
         return order[0].orderitems.count()
