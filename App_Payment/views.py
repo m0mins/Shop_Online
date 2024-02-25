@@ -14,8 +14,10 @@ from django.contrib import messages
 def checkout(request):
     user=request.user
     order=Order.objects.filter(user=user,Ordered=False)
+    total_orders=0
     if order.exists():
-        return order[0].orderitems.count()
+        total_orders +=order[0].orderitems.count()
+        order=order[0]
     carts=Cart.objects.filter(user=user,purchased=False)
     cart_items=[]
     total_price=0.0
@@ -25,7 +27,8 @@ def checkout(request):
 
     context={
         'order':'order',
-        'cart_items':'cart_items'
+        'cart_items':'cart_items',
+        'total_orders':'total_orders'
     }
     
     return render( request,'App_Payment/checkout.html',context)
