@@ -4,10 +4,8 @@ from django.conf import settings
 
 class BillingAddress(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    address = models.CharField(max_length=264, blank=True)
-    zipcode = models.CharField(max_length=10, blank=True)
-    city = models.CharField(max_length=30, blank=True)
-    country = models.CharField(max_length=20, blank=True)
+    additional_info = models.TextField(max_length=300, blank=True)
+    compnay_name=models.CharField(max_length=150)
 
     def __str__(self):
         return f'{self.user.profile.username} billing address'
