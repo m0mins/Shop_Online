@@ -153,7 +153,7 @@
                                     </div>
                                     <div class="product">
                                         <ul>
-                                            <li class="first-cart">{{ cart_item.item.name }}</li>
+                                            <li class="first-cart">{{ cart_item.item.name }}({{ cart_item.quantity }})</li>
                                             <li>
                                                 <div class="rating-product">
                                                     <i class="fi flaticon-star"></i>
@@ -166,7 +166,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span>${{cart_item.item.price}} x {{ cart_item.quantity }}</span>
+                                    <span>${{ cart_info.total_price }}</span>
                                 </div>
                                 {%endfor%}
                                 {% endwith %}
