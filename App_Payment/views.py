@@ -11,5 +11,20 @@ from django.contrib import messages
 # Create your views here.
 
 @login_required  
-def checkout(request):
-    return render( request,'App_Payment/checkout.html')
+def checkout(request,user):
+    order=Order.objects.filter(user=user,Ordered=False)
+    if order.exists():
+        return order[0].orderitems.count()
+    carts=Cart.objects.filter(user=user,purchased=False)
+    cart_items=[]
+    total_price=0.0
+    for card_item in carts:
+        total_price +=float(card_item.get_total())
+        cart_items.append(card_item)
+
+    context={
+        'order':'order',
+        'cart_items':'cart_items'
+    }
+    
+    return render( request,'App_Payment/checkout.html',context)
