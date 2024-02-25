@@ -143,7 +143,7 @@
                                     <h2>Products <span>Subtotal</span></h2>
                                 </div>
                                 {%if user.is_authenticated%}
-                                {% for cart_item in cart_items %}
+                                {% for cart_item in carts %}
                                 <div class="oreder-product">
                                     <div class="images">
                                         <span>
@@ -152,7 +152,7 @@
                                     </div>
                                     <div class="product">
                                         <ul>
-                                            <li class="first-cart">{{cart_item.item.name}}</li>
+                                            <li class="first-cart">{{cart_item.item.name}}({{cart_item.quantity}})</li>
                                             <li>
                                                 <div class="rating-product">
                                                     <i class="fi flaticon-star"></i>
@@ -165,7 +165,7 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <span>${{ total_price }}</span>
+                                    <span>${{ cart_item.get_total() }}</span>
                                 </div>
                                 {%endfor%}
                               
