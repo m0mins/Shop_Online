@@ -12,7 +12,7 @@ from django.contrib import messages
 
 @login_required  
 def checkout(request):
-    order=Order.objects.filter(user=request.user,Ordered=False)
+    order=Order.objects.filter(user=request.user,ordered=False)
     total_orders=0
     if order.exists():
         total_orders +=order[0].orderitems.count()
