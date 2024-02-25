@@ -1,0 +1,21 @@
+# views.py
+from django.shortcuts import render
+from .models import Customer
+
+def create_or_get_customer(request):
+    if request.method == 'POST':
+        # Assuming form data is posted from the template
+        customer_name = request.POST.get('customer_name')
+        customer_email = request.POST.get('customer_email')
+
+        # Try to get the customer by email
+        customer, created = Customer.objects.get_or_create(email=customer_email, defaults={'name': customer_name})
+
+        # If the customer is created, you can customize it further
+        if created:
+            # Additional customization for a newly created customer
+            pass
+
+        return render(request, 'customer_created.html', {'customer': customer, 'created': created})
+
+    return render(request, 'customer_form.html')
