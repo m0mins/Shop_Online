@@ -27,7 +27,8 @@ def checkout(request):
     context={
         'order':'order',
         'cart_items':'cart_items',
-        'total_orders':'total_orders'
+        'total_orders':'total_orders',
+        'total_price':'total_price'
     }
     
     return render( request,'App_Payment/checkout.html',context)
