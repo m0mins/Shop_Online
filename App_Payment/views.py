@@ -12,13 +12,12 @@ from django.contrib import messages
 
 @login_required  
 def checkout(request):
-    user=request.user
-    order=Order.objects.filter(user=user,Ordered=False)
+    order=Order.objects.filter(user=request.user,Ordered=False)
     total_orders=0
     if order.exists():
         total_orders +=order[0].orderitems.count()
         order=order[0]
-    carts=Cart.objects.filter(user=user,purchased=False)
+    carts=Cart.objects.filter(user=request.user,purchased=False)
     cart_items=[]
     total_price=0.0
     for card_item in carts:
