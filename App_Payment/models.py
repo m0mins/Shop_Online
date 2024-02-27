@@ -6,8 +6,8 @@ from App_Accounts.models import User
 class BillingAddress(models.Model):
     #user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    company_name=models.CharField(max_length=264, blank=True)
-    additional_info = models.TextField(max_length=264, blank=True)
+    #company_name=models.CharField(max_length=264, blank=True)
+    #additional_info = models.TextField(max_length=264, blank=True)
     
     #address = models.CharField(max_length=264, blank=True)
     #zipcode = models.CharField(max_length=10, blank=True)
