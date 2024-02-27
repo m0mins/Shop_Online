@@ -37,11 +37,13 @@ def checkout(request):
         saved_address.phone=phone
         saved_address.address=address
         saved_address.additional_info=additional_info
-        saved_address.save
-        if carts.exists() and orders.exists():
-            order = orders[0]
+        if saved_address.is_valid():
+
+            saved_address.save
+            if carts.exists() and orders.exists():
+                order = orders[0]
     
-            return render(request, 'App_Payment/checkout.html', context={'carts':carts, 'order':order})
+                return render(request, 'App_Payment/checkout.html', context={'carts':carts, 'order':order})
     else:
         messages.warning(request, "You don't have any item in your cart!")
         return redirect("App_Home:home")
