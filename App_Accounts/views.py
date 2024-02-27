@@ -159,7 +159,8 @@ def profile_update(request):
 
     if request.method == 'POST':
         # Update the profile instance with the new data from the form
-        profile_instance.full_name = request.POST.get('full_name')
+        profile_instance.first_name = request.POST.get('first_name')
+        profile_instance.last_name = request.POST.get('last_name')
         profile_instance.address_1 = request.POST.get('address_1')
         profile_instance.country = request.POST.get('country')
         profile_instance.city = request.POST.get('city')
