@@ -13,8 +13,8 @@ from django.contrib import messages
 
 @login_required  
 def checkout(request):
-    carts = Cart.objects.filter(user=request.user, purchased=False)
-    orders = Order.objects.filter(user=request.user, ordered=False)
+    #carts = Cart.objects.filter(user=request.user, purchased=False)
+    #orders = Order.objects.filter(user=request.user, ordered=False)
     if request.method=='POST':
         firstName=request.POST.get('firstName')
         lastName=request.POST.get('lastName')
@@ -38,15 +38,15 @@ def checkout(request):
         saved_address.address=address
         saved_address.additional_info=additional_info
         if saved_address.is_valid():
-
-            saved_address.save
-            if carts.exists() and orders.exists():
-                order = orders[0]
-    
-                return render(request, 'App_Payment/checkout.html', context={'carts':carts, 'order':order})
-    else:
-        messages.warning(request, "You don't have any item in your cart!")
-        return redirect("App_Home:home")
+            saved_address.save() 
+    carts = Cart.objects.filter(user=request.user, purchased=False)              
+    order_qs = Order.objects.filter(user=request.user, ordered=False)
+    order_items = order_qs[0].orderitems.all()
+    order_total = order_qs[0].get_totals()
+    return render(request, 'App_Payment/checkout.html', context={'carts':carts, 'order':order_items})
+    #else:
+        #messages.warning(request, "You don't have any item in your cart!")
+        #return redirect("App_Home:home")
     
     
    
