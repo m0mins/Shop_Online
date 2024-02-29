@@ -39,6 +39,7 @@ def checkout(request):
         saved_address.additional_info=additional_info
         if saved_address.is_valid():
             saved_address.save() 
+            messages.warning(request, "Updated your Billing Address")
     carts = Cart.objects.filter(user=request.user, purchased=False)              
     order_qs = Order.objects.filter(user=request.user, ordered=False)
     order_items = order_qs[0].orderitems.all()
