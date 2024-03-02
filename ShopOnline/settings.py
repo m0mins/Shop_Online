@@ -29,6 +29,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',
+
     'App_Accounts',
     'App_Cart',
     'App_Order',
@@ -46,6 +52,9 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 AUTH_USER_MODEL='App_Accounts.User'
 
+AUTHENTICATION_BACKENDS = [
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -155,6 +164,7 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 MEDIA_ROOT = BASE_DIR / 'media'
 
+#SITE_ID = 1
 
 LOGIN_URL='accounts/login/'
 BASE_URL = 'http://18.141.173.32/'

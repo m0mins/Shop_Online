@@ -18,6 +18,8 @@ from App_Accounts.forms import ProfileForm
 from App_Accounts.models import Profile
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
+from django.shortcuts import render, redirect
+from .utils import generate_otp, send_otp_email
 #from App_Login.forms import ProfileForm, SignUpForm
 
 # Messages
@@ -29,7 +31,6 @@ def register(request):
         email=request.POST.get('email')
         password=request.POST.get('pass')
         password1=request.POST.get('pass1')
-        
         if password is not None:
             if password !=password1:
                 messages.error(request,"Password Mismatchd")
