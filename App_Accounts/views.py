@@ -53,8 +53,8 @@ def register(request):
                 request.session['otp'] = otp
                 request.session['email'] = email
                 #send_email(email,auth_token)
-                #return HttpResponseRedirect(reverse('App_Accounts:success'))
-                return redirect('verify_account')
+                return HttpResponseRedirect(reverse('App_Accounts:verify_account'))
+                #return redirect('verify_account')
     return render(request, 'App_Accounts/registration.html')
 
 
