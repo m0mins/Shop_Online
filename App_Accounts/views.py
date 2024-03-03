@@ -24,6 +24,11 @@ from django.shortcuts import render, redirect
 # Messages
 from django.contrib import messages
 
+import random
+
+def generate_otp(length=6):
+    return ''.join(random.choice('0123456789') for _ in range(length))
+
 def register(request):
     if request.method == 'POST':
         username=request.POST.get('username')
@@ -37,36 +42,69 @@ def register(request):
                 if User.objects.filter(email=email).exists():
                     messages.error(request,"Email already taken")
                     return HttpResponseRedirect(reverse('App_Accounts:register'))
-                auth_token=str(uuid.uuid4())
-                user=User.objects.create(username=username,email=email,password=password,auth_token=auth_token)
+                otp = generate_otp()
+                
+                #auth_token=str(uuid.uuid4())
+                #user=User.objects.create(username=username,email=email,password=password,auth_token=auth_token)
+                user=User.objects.create(username=username,email=email,password=password)
                 user.set_password(password)           
                 user.save()
-                send_email(email,auth_token)
-                return HttpResponseRedirect(reverse('App_Accounts:success'))
+                send_email(email, otp)
+                request.session['otp'] = otp
+                request.session['email'] = email
+                #send_email(email,auth_token)
+                #return HttpResponseRedirect(reverse('App_Accounts:success'))
+                return redirect('verify_account')
     return render(request, 'App_Accounts/registration.html')
 
 
+#def send_email(email, auth_token):
 def send_email(email, auth_token):
-    base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
+    #base_url = settings.BASE_URL  # Assuming BASE_URL is defined in your settings
 
     # Use reverse to dynamically generate the URL based on your URL patterns
-    verify_url = reverse('App_Accounts:verify_account', kwargs={'auth_token': auth_token})
+    #verify_url = reverse('App_Accounts:verify_account', kwargs={'auth_token': auth_token})
 
     # Combine the base URL and the dynamically generated URL
-    full_url = f'{base_url}{verify_url}'
+    #full_url = f'{base_url}{verify_url}'
 
-    subject = 'Account verify link'
-    message = f'Hi, click the link to create your account: {full_url}'
-    email_from = settings.EMAIL_HOST_USER
-    recipient = [email]
-    send_mail(subject, message, email_from, recipient)
+    #subject = 'Account verify link'
+    #message = f'Hi, click the link to create your account: {full_url}'
+    #email_from = settings.EMAIL_HOST_USER
+    #recipient = [email]
+    #send_mail(subject, message, email_from, recipient)
+    subject = 'Your OTP for authentication'
+    message = f'Your OTP is: {auth_token}'
+    from_email = settings.EMAIL_HOST_USER
+    recipient_list = [email]
 
-def verify_account(request,auth_token):
-    prof=User.objects.get(auth_token=auth_token)
-    prof.is_varified=True
-    prof.save()
-    messages.success(request, "Account Created Successfully!")
-    return HttpResponseRedirect(reverse('App_Accounts:login'))
+    send_mail(subject, message, from_email, recipient_list)
+
+#def verify_account(request,auth_token):
+#    prof=User.objects.get(auth_token=auth_token)
+#    prof.is_varified=True
+#    prof.save()
+#    messages.success(request, "Account Created Successfully!")
+#    return HttpResponseRedirect(reverse('App_Accounts:login'))
+def verify_account(request):
+    if request.method == 'POST':
+        user=request.user
+        prof=User.objects.get(user=user)
+        user_entered_otp = request.POST.get('otp')
+        stored_otp = request.session.get('otp')
+        email = request.session.get('email')
+
+        if user_entered_otp == stored_otp:
+            prof.is_varified=True
+            prof.save()
+            messages.success(request, "Account Created Successfully!")
+            return HttpResponseRedirect(reverse('App_Accounts:login'))
+            # OTP is correct, perform authentication logic here
+            # For example, you can log the user in
+
+            #return redirect('home')
+
+    return render(request, 'verify_otp.html')
 
 def success(r):
     return render(r,'App_Accounts/success.html')
