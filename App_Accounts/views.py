@@ -104,7 +104,7 @@ def verify_account(request):
 
             #return redirect('home')
 
-    return render(request, 'verify_otp.html')
+    return render(request, 'App_Accounts/verify.html')
 
 def success(r):
     return render(r,'App_Accounts/success.html')
