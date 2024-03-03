@@ -93,8 +93,9 @@ def verify_account(request):
         user_entered_otp = request.POST.get('otp')
         stored_otp = request.session.get('otp')
         email = request.session.get('email')
+        tr=User.objects.filter(email=email)
 
-        if user_entered_otp == stored_otp:
+        if user_entered_otp == stored_otp and email==tr:
             prof.is_varified=True
             prof.save()
             messages.success(request, "Account Created Successfully!")
