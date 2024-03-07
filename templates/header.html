@@ -177,7 +177,7 @@
                                                     <a href="product.html"><img src="{{cart_item.item.mainimage.url}}" alt></a>
                                                 </div>
                                                 <div class="mini-cart-item-des">
-                                                    <a href="product.html">{{ cart_item.item.name }}</a>
+                                                    <a href="{% url 'App_Products:single_product' pk=cart_item.id %}">{{ cart_item.item.name }}</a>
                                                     <span class="mini-cart-item-price">${{cart_item.item.price}} x {{ cart_item.quantity }}</span>
                                                     <span class="mini-cart-item-quantity"><a href="#"><i
                                                                 class="ti-close"></i></a></span>
