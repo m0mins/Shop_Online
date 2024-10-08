@@ -29,16 +29,24 @@
                                                 <h4 class="text-right">Profile Update </h4>
                                         </div>
                                         <div class="row mt-2">
-                                                <div class="col-md-12"><label class="labels">Full Name</label><input
-                                                                type="text" class="form-control" name="full_name"
-                                                                placeholder="full name"
-                                                                value="{{ profile_instance.full_name }}"></div>
+                                                <div class="col-md-6"><label class="labels">First Name</label><input
+                                                                type="text" class="form-control" name="first_name"
+                                                                placeholder="first name"
+                                                                value="{{ profile_instance.first_name }}"></div>
+                                                                <div class="col-md-6"><label class="labels">Last Name</label><input
+                                                                        type="text" class="form-control" name="last_name"
+                                                                        placeholder="last name"
+                                                                        value="{{ profile_instance.last_name }}"></div>
                                         </div>
                                         <div class="row mt-3">
                                                 <div class="col-md-12"><label class="labels">Address</label><input
                                                                 type="text" class="form-control" name="address_1"
                                                                 placeholder="enter your address"
                                                                 value="{{ profile_instance.address_1 }}"></div>
+                                                <div class="col-md-12"><label class="labels">Phone</label><input
+                                                                type="text" class="form-control" name="phone"
+                                                                placeholder="enter your phone number"
+                                                                value="{{ profile_instance.phone }}"></div>
                                                 <div class="col-md-12"><label class="labels">Country</label><input
                                                                 type="text" class="form-control" name="country"
                                                                 placeholder="enter your country"

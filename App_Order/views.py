@@ -113,3 +113,12 @@ def decrease_cart(request, pk):
         return redirect("App_Home:home")
     
 
+@login_required(login_url='/accounts/login/')
+def order_list(request):
+    try:
+        orders = Order.objects.filter(user=request.user, ordered=True)
+        context = {"orders": orders}
+    except:
+        messages.warning(request, "You do no have an active order")
+        return redirect("App_Home:home")
+    return render(request, "App_Order/order_list.html", context)

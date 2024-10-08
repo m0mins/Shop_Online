@@ -1,11 +1,8 @@
-
-
-
-
-
-
-
-
+{% extends 'base.html'%}
+{% load static %}
+{% load cart_tags %}
+{% block title_block %} ShopOnline {% endblock %}
+{% block body_block %} 
 
 
       <!-- start wpo-page-title -->
@@ -16,7 +13,7 @@
                 <div class="col col-xs-12">
                     <div class="wpo-breadcumb-wrap">
                         <ol class="wpo-breadcumb-wrap">
-                            <li><a href="index.html">Home</a></li>
+                            <li><a href="{% url 'App_Home:home' %}">Home</a></li>
                             <li>Error</li>
                         </ol>
                     </div>
@@ -39,7 +36,7 @@
                             <h3>Oops! Page Not Found!</h3>
                             <p>We’re sorry but we can’t seem to find the page you requested. This might be because
                                 you have typed the web address incorrectly.</p>
-                            <a href="index.html" class="theme-btn">Back to home</a>
+                            <a href="{% url 'App_Home:home' %}" class="theme-btn">Back to home</a>
                         </div>
                     </div>
                 </div>
@@ -47,3 +44,4 @@
         </div> <!-- end container -->
     </section>
     <!-- end error-404-section -->
+{% endblock %}

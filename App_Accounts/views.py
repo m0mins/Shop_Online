@@ -15,7 +15,7 @@ from django.core.mail import send_mail
 from django.contrib.auth import update_session_auth_hash
 # Forms and Models
 from App_Accounts.forms import ProfileForm
-from App_Accounts.models import Profile
+from App_Accounts.models import Profile,UserRole
 from django.core.files.storage import default_storage
 from django.core.files.base import ContentFile
 from django.shortcuts import render, redirect
@@ -35,6 +35,7 @@ def register(request):
         email=request.POST.get('email')
         password=request.POST.get('pass')
         password1=request.POST.get('pass1')
+        role = request.POST.get('role','is_user')
         if password is not None:
             if password !=password1:
                 messages.error(request,"Password Mismatchd")
@@ -43,11 +44,12 @@ def register(request):
                     messages.error(request,"Email already taken")
                     return HttpResponseRedirect(reverse('App_Accounts:register'))
                 otp = generate_otp()
-                
+                user_role = UserRole.objects.get(role=role)
                 #auth_token=str(uuid.uuid4())
                 #user=User.objects.create(username=username,email=email,password=password,auth_token=auth_token)
-                user=User.objects.create(username=username,email=email,password=password)
-                user.set_password(password)           
+                user=User.objects.create(username=username,email=email,password=password,role=user_role)
+                user.set_password(password)  
+                user.is_active = False         
                 user.save()
                 send_email(email, otp)
                 request.session['otp'] = otp
@@ -86,26 +88,29 @@ def send_email(email, auth_token):
 #    prof.save()
 #    messages.success(request, "Account Created Successfully!")
 #    return HttpResponseRedirect(reverse('App_Accounts:login'))
+
 def verify_account(request):
     if request.method == 'POST':
-        user=request.user
-        prof=User.objects.get(user=user)
         user_entered_otp = request.POST.get('otp')
         stored_otp = request.session.get('otp')
         email = request.session.get('email')
-        tr=User.objects.filter(email=email)
-
-        if user_entered_otp == stored_otp and email==tr:
-            prof.is_varified=True
-            prof.save()
+        
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            messages.error(request, "Invalid verification attempt.")
+            return HttpResponseRedirect(reverse('App_Accounts:verify_account'))
+        
+        if user_entered_otp == stored_otp:
+            user.is_active = True  # Activate the user account
+            user.save()
             messages.success(request, "Account Created Successfully!")
             return HttpResponseRedirect(reverse('App_Accounts:login'))
-            # OTP is correct, perform authentication logic here
-            # For example, you can log the user in
-
-            #return redirect('home')
-
+        else:
+            messages.error(request, "Invalid OTP")
+    
     return render(request, 'App_Accounts/verify.html')
+
 
 def success(r):
     return render(r,'App_Accounts/success.html')
@@ -201,6 +206,8 @@ def profile_update(request):
         profile_instance.first_name = request.POST.get('first_name')
         profile_instance.last_name = request.POST.get('last_name')
         profile_instance.address_1 = request.POST.get('address_1')
+        profile_instance.phone = request.POST.get('phone')
+
         profile_instance.country = request.POST.get('country')
         profile_instance.city = request.POST.get('city')
         profile_instance.zipcode = request.POST.get('zipcode')
@@ -209,8 +216,8 @@ def profile_update(request):
             profile_instance.image = request.FILES['image']
         # Add other fields as needed
         profile_instance.save()
-        return redirect(request.META['HTTP_REFERER'])
-
+        #return redirect(request.META['HTTP_REFERER'])
+        return redirect("App_Payment:checkout")
         #return redirect("App_Home:home") # Redirect to a view showing the updated profile
 
     return render(request, 'App_Accounts/profile_update.html', {'profile_instance': profile_instance})

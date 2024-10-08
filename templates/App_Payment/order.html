@@ -1,0 +1,128 @@
+{% extends 'base.html'%}
+{% load static %}
+{% load cart_tags %}
+{% block title_block %} ShopOnline {% endblock %}
+{% block body_block %} 
+
+<!-- start wpo-page-title -->
+<section class="wpo-page-title">
+    <h2 class="d-none">Hide</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col col-xs-12">
+                <div class="wpo-breadcumb-wrap">
+                    <ol class="wpo-breadcumb-wrap">
+                        <li><a href="index.html">Home</a></li>
+                        <li>Order</li>
+                    </ol>
+                </div>
+            </div>
+        </div> <!-- end row -->
+    </div> <!-- end container -->
+</section>
+<!-- end page-title -->
+<div class="order-area section-padding">
+    <div class="container">
+        <div class="form">
+            <div class="order-wrapper">
+                <div class="row">
+                    <div class="col-12">
+                        <form action="https://wpocean.com/html/tf/themart/order">
+                            <table class="table-responsive order-wrap">
+                                <thead>
+                                    <tr>
+                                        <th class="images images-b">Order ID</th>
+                                        <th class="product">Date</th>
+                                        <th class="ptice">Quantity</th>
+                                        <th class="ptice">Ship To</th>
+                                        <th class="">Total Price</th>
+                                        <th class="remove">Status</th>
+                                        <th class="action remove-b">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="images"># 8976A</td>
+                                        <td class="product">05 : 08 : 2022</td>
+                                        <td class="ptice">06</td>
+                                        <td class="name">Alex Genderia</td>
+                                        <td class="">$ 450</td>
+                                        <td class="Del"><span>Delivered</span></td>
+                                        <td class="action">
+                                            <ul>
+                                                <li class="w-btn-view"><a data-bs-toggle="tooltip"
+                                                        data-bs-html="true" title="View" href="#"><i
+                                                            class="fi ti-eye"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="images"># 8976A</td>
+                                        <td class="product">05 : 08 : 2022</td>
+                                        <td class="ptice">06</td>
+                                        <td class="name">Alex Genderia</td>
+                                        <td class="">$ 450</td>
+                                        <td class="stock"><span>Pending</span></td>
+                                        <td class="action">
+                                            <ul>
+                                                <li class="w-btn-view"><a data-bs-toggle="tooltip"
+                                                        data-bs-html="true" title="View" href="#"><i
+                                                            class="fi ti-eye"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="images"># 8976A</td>
+                                        <td class="product">05 : 08 : 2022</td>
+                                        <td class="ptice">06</td>
+                                        <td class="name">Alex Genderia</td>
+                                        <td class="">$ 450</td>
+                                        <td class="stocks"><span>Pending</span></td>
+                                        <td class="action">
+                                            <ul>
+                                                <li class="w-btn-view"><a data-bs-toggle="tooltip"
+                                                        data-bs-html="true" title="View" href="#"><i
+                                                            class="fi ti-eye"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="images"># 8976A</td>
+                                        <td class="product">05 : 08 : 2022</td>
+                                        <td class="ptice">06</td>
+                                        <td class="name">Alex Genderia</td>
+                                        <td class="">$ 450</td>
+                                        <td class="can"><span>Canceled</span></td>
+                                        <td class="action">
+                                            <ul>
+                                                <li class="w-btn-view"><a data-bs-toggle="tooltip"
+                                                        data-bs-html="true" title="View" href="#"><i
+                                                            class="fi ti-eye"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="images"># 8976A</td>
+                                        <td class="product">05 : 08 : 2022</td>
+                                        <td class="ptice">06</td>
+                                        <td class="name">Alex Genderia</td>
+                                        <td class="">$ 450</td>
+                                        <td class="pro"><span>Processing</span></td>
+                                        <td class="action">
+                                            <ul>
+                                                <li class="w-btn-view"><a data-bs-toggle="tooltip"
+                                                        data-bs-html="true" title="View" href="#"><i
+                                                            class="fi ti-eye"></i></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

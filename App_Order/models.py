@@ -27,7 +27,7 @@ class Cart(models.Model):
 
 class Order(models.Model):
     orderitems = models.ManyToManyField(Cart)
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,related_name="orders")
     ordered = models.BooleanField(default=False)
     created = models.DateTimeField(auto_now_add=True)
     paymentId = models.CharField(max_length=264, blank=True, null=True)

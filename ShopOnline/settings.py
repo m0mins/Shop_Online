@@ -2,6 +2,7 @@ from pathlib import Path
 from decouple import config
 import os
 
+#from dotenv import load_dotenv
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,8 +17,9 @@ SECRET_KEY = 'django-insecure-@+oiguv@le3@u#-3a!tj559s!)v3xyq*)yb0!thf-t*$($v7ea
 # SECURITY WARNING: don't run with debug turned on in production!
 #load_dotenv()
 DEBUG = True
-ALLOWED_HOSTS = ['*']
 #DEBUG = False
+
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -83,26 +85,26 @@ WSGI_APPLICATION = 'ShopOnline.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES={
-   'default':{
-      'ENGINE':'django.db.backends.postgresql_psycopg2',
-      'NAME':config('DATABASE_NAME'),
-      'USER':config('DATABASE_USER'),
-      'PASSWORD':config('DATABASE_PASSWORD'),
-      'HOST':config('DATABASE_HOST'),
-      'PORT':config('DATABASE_PORT'),
-   }
-}
-#DATABASES = {
-#    "default": {
-#        "ENGINE": "django.db.backends.postgresql",
-#        "NAME": "ShopOnlineDB",
-#        "USER": "postgres",
-#        "PASSWORD": "Pass@99",
-#        "HOST": "localhost",
-#        "PORT": "5432",
-#    }
+#DATABASES={
+#   'default':{
+#      'ENGINE':'django.db.backends.postgresql_psycopg2',
+#      'NAME':config('DATABASE_NAME'),
+#      'USER':config('DATABASE_USER'),
+#      'PASSWORD':config('DATABASE_PASSWORD'),
+#      'HOST':config('DATABASE_HOST'),
+#      'PORT':config('DATABASE_PORT'),
+#   }
 #}
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "ShopOnlineDB",
+        "USER": "postgres",
+        "PASSWORD": "Pass@99",
+        "HOST": "localhost",
+        "PORT": "5432",
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -142,29 +144,43 @@ USE_TZ = True
 #STATIC_URL = 'static/'
 #STATIC_ROOT = 'static/'
 #MEDIA_URL = 'media/'
-#STATICFILES_DIRS = [BASE_DIR / 'static', ]
+#STATIC_ROOT = [BASE_DIR / 'static', ]
 #MEDIA_ROOT = BASE_DIR / 'media'
 
-
+#
+#STATIC_URL = '/static/'
+#MEDIA_URL = '/media/'
+#
+#STATIC_ROOT = BASE_DIR / 'static'
+#
+#
+##STATIC_ROOT = BASE_DIR / 'static_root'
+#
+#MEDIA_ROOT = BASE_DIR / 'media'
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
 MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "media"
 
-STATIC_ROOT = BASE_DIR / 'static'
 
-
-#STATIC_ROOT = BASE_DIR / 'static_root'
-
-MEDIA_ROOT = BASE_DIR / 'media'
 
 #SITE_ID = 1
-
 LOGIN_URL='accounts/login/'
-BASE_URL = 'http://18.141.173.32/'
+BASE_URL = 'http://127.0.0.1:8000/'
+
+#BASE_URL = 'http://18.141.173.32/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 EMAIL_BackEND= 'django.core.mail.backends.smtp.EmailBackend'
+
+CONTACT_EMAIL = 'contact@gmail.com'
+ADMIN_EMAILS = ['momin11@cse.pstu.ac.bd','momincse85@gmail.com' ]
 EMAIL_HOST= "smtp.gmail.com"
 EMAIL_USE_TLS= True
 EMAIL_PORT= 587

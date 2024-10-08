@@ -59,3 +59,9 @@ def product_count_by_color(color):
     else:
         return 0
     
+@register.filter
+def order_fiter(user):
+    orders = Order.objects.filter(user=user, ordered=True)
+    carts = Cart.objects.filter(user=user, purchased=True)
+    return {'orders': orders, 'carts': carts}
+
